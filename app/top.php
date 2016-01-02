@@ -138,16 +138,6 @@ else if(LanguageManager::getCookieLanguageTag() === null) {
     // Define a language tag variable
     $langTag = null;
 
-    // Use the user's preferred language if set and logged in
-    if(SessionManager::isLoggedIn()) {
-        // Check whether the logged in user has any preferred language
-        $langTag = LanguageManager::getUserLanguageTag();
-
-        // Use this language tag if it's valid
-        if($langTag !== null)
-            LanguageManager::setLanguageTag($langTag, true, true, false);
-    }
-
     // Show the language chooser if the language is not yet determined
     if($langTag === null) {
         // Get the query string, and append the language part
