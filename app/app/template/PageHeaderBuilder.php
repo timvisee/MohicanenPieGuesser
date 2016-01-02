@@ -324,6 +324,7 @@ class PageHeaderBuilder {
         // Print div closing tag
         echo '</div>';
 
+        /*
         // Print the active user if set
         if($this->getShowActiveUser() && SessionManager::isLoggedIn() && SessionManager::getLoggedInUser()->getId() != SessionManager::getActiveUser()->getId()) {
             // Ge the user
@@ -332,6 +333,6 @@ class PageHeaderBuilder {
             echo '<div data-role="header" style="' . $headerDivStyle . '">';
             echo '<p class="header-message"><a href="linkedusermanager.php">' .  __('account', 'usingAccountAs') . ' ' . $activeUser->getFullName() . '</a></p>';
             echo '</div>';
-        }
+        }*/
     }
 }
