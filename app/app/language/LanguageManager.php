@@ -3,8 +3,6 @@
 namespace app\language;
 
 use app\config\Config;
-use app\session\SessionManager;
-use app\user\User;
 use carbon\core\cookie\CookieManager;
 use carbon\core\io\filesystem\directory\Directory;
 use carbon\core\io\filesystem\directory\DirectoryScanner;
@@ -207,51 +205,6 @@ class LanguageManager {
         if(($lang = static::getCookieLanguage()) !== null)
             return $lang;
 
-        // Return the user language if set
-        if(($lang = static::getUserLanguage()) !== null)
-            return $lang;
-
-        // Return the default language if valid
-        if(($defLang = static::getDefaultLanguage()) !== null)
-            return $defLang;
-
-        // If any language is loaded, return the first
-        if(sizeof(static::$languages) > 0)
-            return static::$languages[0];
-
-        // No language preferred, return null
-        return null;
-    }
-
-    /**
-     * Get the preferred language to use for the specified user.
-     * The possible best language will be returned if the user doesn't have a preferred language set.
-     *
-     * @param User|null $user [optional] The user to get the preferred language for, or null to get the language for the
-     * currently logged in user.
-     *
-     * @return Language|null The preferred language to use, or null if no language could be selected or if the language
-     * isn't loaded.
-     */
-    public static function getPreferredLanguageFromUser($user = null) {
-        // Parse the user, and make sure it's valid
-        if($user === null)
-            $user = SessionManager::getLoggedInUser();
-        if(!($user instanceof User))
-            return null;
-
-        // Return the user language if set
-        if(($lang = static::getUserLanguage($user)) !== null)
-            return $lang;
-
-        // Return the current language if set
-        if(($lang = static::getCurrentLanguage()) !== null)
-            return $lang;
-
-        // Return the cookie language if set
-        if(($lang = static::getCookieLanguage()) !== null)
-            return $lang;
-
         // Return the default language if valid
         if(($defLang = static::getDefaultLanguage()) !== null)
             return $defLang;
@@ -336,84 +289,6 @@ class LanguageManager {
     }
 
     /**
-     * Get the user language if specified and loaded.
-     *
-     * @param User|null $user [optional] The user to get the language tag from, or null to use the current logged in user.
-     *
-     * @return Language|null The user language, or null if not loaded or not specified.
-     */
-    public static function getUserLanguage($user = null) {
-        return static::getByTag(static::getUserLanguageTag($user));
-    }
-
-    /**
-     * Get the preferred language tag for the specified user if set.
-     *
-     * @param User|null $user [optional] The user, or null to use the current logged in user.
-     *
-     * @return string|null Preferred user language tag, or null if not set.
-     */
-    public static function getUserLanguageTag($user = null) {
-        // Parse the user
-        if($user === null) {
-            // Make sure the user is logged in
-            if(!SessionManager::isLoggedIn())
-                return null;
-
-            // Get the logged in user
-            $user = SessionManager::getLoggedInUser();
-        }
-
-        // Make sure the user instance is valid
-        if(!($user instanceof User))
-            return null;
-
-        // Get the user and return the preferred language for the user if set
-        return $user->getMeta(static::LANGUAGE_USER_META_KEY);
-    }
-
-    /**
-     * Get the preferred language tag for the specified user if set.
-     *
-     * @param string|null $langTag The preferred language tag or null to reset the preferred language tag.
-     * @param User|null $user [optional] The user, or null to use the current logged in user.
-     *
-     * @return bool True if succeed, false if not.
-     *
-     * @throws Exception Throws if an error occurred.
-     */
-    public static function setUserLanguageTag($langTag, $user = null) {
-        // Parse the language tag
-        if($langTag instanceof Language)
-            $langTag = $langTag->getTag();
-
-        // Validate the language tag
-        if($langTag !== null && !static::isWithTag($langTag))
-            throw new Exception('Invalid language tag.');
-
-        // Parse the user
-        if($user === null) {
-            // Make sure the user is logged in
-            if(!SessionManager::isLoggedIn())
-                return false;
-
-            // Get the logged in user
-            $user = SessionManager::getLoggedInUser();
-        }
-
-        // Make sure the user instance is valid
-        if(!($user instanceof User))
-            return false;
-
-        // Set or reset the language tag, return the result
-        if($langTag != null)
-            $user->setMeta(static::LANGUAGE_USER_META_KEY, $langTag);
-        else
-            $user->deleteMeta(static::LANGUAGE_USER_META_KEY);
-        return true;
-    }
-
-    /**
      * Get a language value.
      *
      * @param string $section Value section.
@@ -449,11 +324,10 @@ class LanguageManager {
      * @param string|null $langTag The language tag, or null to reset.
      * @param bool $setCurrent [optional] True to set the currently used language tag, false if not.
      * @param bool $setCookie [optional] True to set the cookie language tag, false if not.
-     * @param bool $setUser [optional] True to set the user's language tag, false if not.
      *
      * @throws Exception Throws if an error occurred.
      */
-    public static function setLanguageTag($langTag, $setCurrent = true, $setCookie = true, $setUser = true) {
+    public static function setLanguageTag($langTag, $setCurrent = true, $setCookie = true) {
         // Validate the language
         if(!static::isWithTag($langTag))
             throw new Exception('Invalid language tag.');
@@ -465,10 +339,6 @@ class LanguageManager {
         // Set the language cookie
         if($setCookie)
             static::setCookieLanguageTag($langTag);
-
-        // Make sure the user is logged in
-        if($setUser)
-            static::setUserLanguageTag($langTag);
     }
 
     /**
