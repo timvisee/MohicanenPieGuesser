@@ -63,10 +63,6 @@ CookieManager::setCookieDomain(Config::getValue('cookie', 'domain', ''));
 CookieManager::setCookiePath(Config::getValue('cookie', 'path', '/'));
 CookieManager::setCookiePrefix(Config::getValue('cookie', 'prefix', ''));
 
-// Validate the user session
-use app\session\SessionManager;
-SessionManager::validateSession();
-
 // The app initialized successfully, define the APP_INIT_DONE constant to store the initialization state
 /** Defines whether the app is initialized successfully. */
 define('APP_INIT_DONE', true);
