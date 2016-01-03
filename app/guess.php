@@ -25,30 +25,57 @@ if(isset($_GET['guess_step'])) {
 }
 
 if($guessStep == 1):
-    ?>
-    <div data-role="page" id="page-guess" data-unload="false">
-        <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
-
-        <div data-role="main" class="ui-content">
-            <p>
-                Vul hier onder uw voor- en achternaam in om mee te doen met het raden van het gewicht van de taart.<br /><br />
-                <i><?=__('general', 'note'); ?>: Om mee te kunnen doen moet je je echte naam invullen.</i>
-            </p><br />
-
-            <form method="GET" action="guess.php?guess_step=2">
-                <input type="text" name="guess_first_name" value="" placeholder="<?= __('account', 'firstName'); ?>" />
-                <input type="text" name="guess_last_name" value="" placeholder="<?= __('account', 'lastName'); ?>" />
-
-                <input type="submit" value="<?= __('navigation', 'continue'); ?>" class="ui-btn ui-icon-lock ui-btn-icon-right" />
-            </form>
-        </div>
-
-        <?php
-        // Build the footer and sidebar
-        PageFooterBuilder::create()->build();
+    if(!GuessManager::hasClientGuesses() || isset($_GET['ignoreWarning'])):
         ?>
-    </div>
-    <?php
+        <div data-role="page" id="page-guess" data-unload="false">
+            <?php PageHeaderBuilder::create("Schatting insturen")->setBackButton('index.php')->build(); ?>
+
+            <div data-role="main" class="ui-content">
+                <p>
+                    Vul hier onder uw voor- en achternaam in om mee te doen met het raden van het gewicht van de taart.<br /><br />
+                    <i><?=__('general', 'note'); ?>: Om mee te kunnen doen moet je je echte naam invullen.</i>
+                </p><br />
+
+                <form method="GET" action="guess.php?guess_step=2">
+                    <input type="text" name="guess_first_name" value="" placeholder="<?= __('account', 'firstName'); ?>" />
+                    <input type="text" name="guess_last_name" value="" placeholder="<?= __('account', 'lastName'); ?>" />
+
+                    <input type="submit" value="<?= __('navigation', 'continue'); ?>" class="ui-btn ui-icon-lock ui-btn-icon-right" />
+                </form>
+            </div>
+
+            <?php
+            // Build the footer and sidebar
+            PageFooterBuilder::create()->build();
+            ?>
+        </div>
+        <?php
+
+    else:
+        ?>
+        <div data-role="page" id="page-guess" data-unload="false">
+            <?php PageHeaderBuilder::create("Schatting insturen")->setBackButton('index.php')->build(); ?>
+
+            <div data-role="main" class="ui-content">
+                <p>
+                    Je hebt al eerder een schatting ingestuurd via dit apparaat.
+                    Je mag maar &eacute;&eacute;n schatting per persoon insturen, anders worden je schattingen gediskwalificeerd.<br />
+                    <br />
+                    Klik op doorgaan als iemand die nog geen schatting ingestuurd heeft dit apparaat wilt gebruiken.
+                </p><br />
+
+                <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                    <a href="guess.php?ignoreWarning" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Doorgaan</a>
+                </fieldset>
+            </div>
+
+            <?php
+            // Build the footer and sidebar
+            PageFooterBuilder::create()->build();
+            ?>
+        </div>
+        <?php
+    endif;
 
 elseif($guessStep == 2):
 
@@ -63,7 +90,7 @@ elseif($guessStep == 2):
 
     ?>
     <div data-role="page" id="page-guess" data-unload="false">
-        <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
+        <?php PageHeaderBuilder::create("Schatting insturen")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
             <p><?=__('general', 'hello'); ?> <?=$_GET['guess_first_name']; ?>!</p><br />
@@ -103,7 +130,7 @@ elseif($guessStep == 3):
 
     ?>
     <div data-role="page" id="page-guess" data-unload="false">
-        <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
+        <?php PageHeaderBuilder::create("Schatting insturen")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
             <p>Vul hier onder naar uw schatting het gewicht van de taart in. Gebruik het tekstvakje om een precieze waarde in te vullen.<br /><br />
@@ -149,7 +176,7 @@ elseif($guessStep == 4):
 
     ?>
     <div data-role="page" id="page-guess-send" data-unload="false">
-        <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
+        <?php PageHeaderBuilder::create("Schatting insturen")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
             <center>
