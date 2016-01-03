@@ -1,9 +1,9 @@
 <?php
 
+use app\guess\GuessManager;
 use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 use app\util\AccountUtils;
-use carbon\core\util\StringUtils;
 
 // Include the page top
 require_once('top.php');
@@ -98,7 +98,8 @@ elseif($guessStep == 3):
     if(!AccountUtils::isValidMail($mail))
         showErrorPage(__('register', 'invalidMail'));
 
-    // TODO: Make sure nobody has guessed yet with this E-mail address
+    if(GuessManager::isGuessWithMail($mail))
+        showErrorPage(__('register', 'mailAlreadyInUse'));
 
     ?>
     <div data-role="page" id="page-guess" data-unload="false">
@@ -140,7 +141,8 @@ elseif($guessStep == 4):
     if(!AccountUtils::isValidMail($mail))
         showErrorPage(__('register', 'invalidMail'));
 
-    // TODO: Make sure nobody has guessed yet with this E-mail address
+    if(GuessManager::isGuessWithMail($mail))
+        showErrorPage(__('register', 'mailAlreadyInUse'));
 
     // TODO: Make sure the guessed weight is valid
 
@@ -206,7 +208,8 @@ elseif($guessStep == 5):
     if(!AccountUtils::isValidMail($mail))
         showErrorPage();
 
-    // TODO: Make sure this mail hasn't been used before!
+    if(GuessManager::isGuessWithMail($mail))
+        showErrorPage();
 
     // TODO: Make sure the guessed value is valid!
 
