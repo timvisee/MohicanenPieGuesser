@@ -184,18 +184,42 @@ class GuessManager {
         return $statement->rowCount();
     }
 
+    /**
+     * Check whether this client has made any guesses.
+     *
+     * @return bool True if any guesses are made.
+     */
     public static function hasClientGuesses() {
         return GuessManager::getClientGuessCount() > 0;
     }
 
+    /**
+     * Get the number of guesses made by this client.
+     *
+     * @return int Number of guesses made.
+     *
+     * @throws Exception Throws if an error occurred.
+     */
     public static function getClientGuessCount() {
         return self::getGuessesWithSessionIdCount(session_id());
     }
 
+    /**
+     * Get the number of guesses left for this client.
+     *
+     * @return int Number of guesses left.
+     *
+     * @throws Exception Throws if an error occurred.
+     */
     public static function getClientGuessesLeft() {
         return max(((int) Registry::getValue('client.maxEntries')->getValue()) - self::getClientGuessCount(), 0);
     }
 
+    /**
+     * Check whether this client has any guesses left.
+     *
+     * @return bool True if this client has any guesses left.
+     */
     public static function hasClientGuessesLeft() {
         return self::getClientGuessesLeft() > 0;
     }
