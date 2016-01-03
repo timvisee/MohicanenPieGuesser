@@ -2,11 +2,7 @@
 
 namespace app\template;
 
-use app\language\LanguageManager;
-use app\session\SessionManager;
-use app\user\User;
 use app\util\ColorUtils;
-use carbon\core\util\StringUtils;
 
 // Prevent direct requests to this file due to security reasons
 defined('APP_INIT') or die('Access denied!');
