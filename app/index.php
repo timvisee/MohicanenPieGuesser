@@ -24,13 +24,10 @@ require_once('top.php');
                 <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
             <?php endif; ?>
             <a href="overview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
-        </fieldset>
-
-        <?php if(GuessManager::hasClientGuesses()): ?>
-            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+            <?php if(GuessManager::hasClientGuesses()): ?>
                 <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
-            </fieldset>
-        <?php endif; ?>
+            <?php endif; ?>
+        </fieldset>
     </div>
 
     <?php PageFooterBuilder::create()->build(); ?>
