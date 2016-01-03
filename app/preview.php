@@ -10,7 +10,7 @@ require_once('top.php');
     <div data-role="page" id="page-preview">
         <?php
         // Construct the builder
-        $builder = PageHeaderBuilder::create();
+        $builder = PageHeaderBuilder::create('Overzicht');
 
         // Check whether to add a back button
         if(isset($_GET['back']))
@@ -20,6 +20,12 @@ require_once('top.php');
         $builder->build();
         ?>
         <div data-role="main" class="ui-content">
+
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="myguesses.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Mijn schattingen</a>
+            </fieldset>
+
+            <br />
 
             <center>
                 <div id="guess-counter-container">

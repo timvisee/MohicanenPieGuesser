@@ -304,7 +304,9 @@ h1.ui-title:nth-child(1) > a:nth-child(1) {
   background-color: #0067B2 !important;
   border-color: #004c8c !important; }
 
+#header h1,
 h1.ui-title:nth-child(1) > a:nth-child(1) {
+  color: #FFF !important;
   text-shadow: 0 1px 0 #004c8c !important; }
 
 .ui-btn-left {
@@ -313,18 +315,16 @@ h1.ui-title:nth-child(1) > a:nth-child(1) {
   text-shadow: 0 1px 0 #004c8c !important;
   border-color: #004c8c !important; }
 
-.ui-btn-left {
+.ui-btn.ui-btn-active,
+a.ui-btn.ui-btn-active,
+input.ui-btn.ui-btn-active {
   color: #FFF !important;
-  background-color: #0067B2 !important;
-  text-shadow: 0 1px 0 #004c8c !important;
-  border-color: #004c8c !important; }
+  background-color: #003e7a !important;
+  text-shadow: 0 1px 0 #00284f !important;
+  border-color: #00284f !important; }
 
-.ui-btn-left.ui-btn-active {
-  background-color: #00376c !important; }
-
-a.ui-btn.ui-btn-active {
-  color: #FFF !important;
-  background-color: #00376c !important;
-  text-shadow: 0 1px 0 #004c8c !important; }
+.ui-footer > h1:nth-child(1) {
+  margin-left: 5px !important;
+  margin-right: 5px !important; }
 
 /*# sourceMappingURL=style.css.map */
