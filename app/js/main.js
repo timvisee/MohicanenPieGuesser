@@ -303,14 +303,10 @@ $(document).on("pageshow", function() {
                 guessesRefreshTimer = null;
             }
 
-            // Update everything on start
-            updateAll();
-
             // Bind to the channel to process updates
             channel.bind('client-newGuess', function(data) {
                 // Add the data to the list of guesses
                 guesses.push({firstName: data.firstName, lastName: data.lastName, weight: data.weight});
-                //alert('CLIENT: Name: ' + data.firstName + ' ' + data.lastName + '; Weight: ' + data.weight + ' gram');
 
                 // Update everything
                 updateAll();
