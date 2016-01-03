@@ -80,16 +80,85 @@ $(document).on("pageshow", function() {
 
         // Wait for the subscription to succeed
         if(pageId == 'page-guess-send') {
-            channel.bind('pusher:subscription_succeeded', function() {
-                // Determine a random weight
-                var weight = 12.5;
-                var num = Math.random() * 12;
-                for(var i = 0; i < num; i++)
-                    weight += (Math.random() * 2) - 1;
 
-                // Trigger a debug event
-                channel.trigger('client-newGuess', {weight: weight, firstName: 'Timmeh', lastName: "Visse"});
-            });
+            /**
+             * Make a guess based on the current values.
+             */
+            function makeGuess() {
+                // Show the loading indicator
+                showLoader("Schatting insturen...");
+
+                // Get the values
+                var firstName = $("input[name=guess_first_name]").val();
+                var lastName = $("input[name=guess_last_name]").val();
+                var mail = $("input[name=guess_mail]").val();
+                var weight = $("input[name=guess_weight]").val();
+
+                // Make a request to make the guess
+                var currentRequest = $.ajax({
+                    type: "POST",
+                    url: "ajax/makeguess.php",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: {
+                        firstName: firstName,
+                        lastName: lastName,
+                        mail: mail,
+                        weight: weight
+                    },
+                    timeout: 10000,
+                    success:function(data) {
+                        // Show the error message if returned
+                        if(data.hasOwnProperty('error')) {
+                            alert("Error: " + data.error);
+                            return;
+                        }
+
+                        // Send the guess
+                        sendGuess(firstName, lastName, weight);
+
+                        // Continue to the overview
+                        window.location.href = 'overview.php';
+                    },
+                    error: function(msg) {
+                        // An error occurred, show a status message
+                        if(msg.statusText)
+                            alert("An error has been detected by Carbon CORE: " + msg.statusText);
+                    },
+                    complete: function() {
+                        // Clear the current request variable
+                        currentRequest = null;
+
+                        // Hide the loading indicator
+                        hideLoader();
+                    }
+                });
+            }
+
+            /**
+             * Send a weight guess to other connected clients.
+             *
+             * @param firstName First name.
+             * @param lastName Last name.
+             * @param weight Weight.
+             */
+            function sendGuess(firstName, lastName, weight) {
+                channel.trigger('client-newGuess', {
+                    weight: weight,
+                    firstName: firstName,
+                    lastName: lastName});
+            }
+
+            //channel.bind('pusher:subscription_succeeded', function() {
+            //    // Determine a random weight
+            //    var weight = 12.5;
+            //    var num = Math.random() * 12;
+            //    for(var i = 0; i < num; i++)
+            //        weight += (Math.random() * 2) - 1;
+            //
+            //    // Trigger a debug event
+            //    channel.trigger('client-newGuess', {weight: weight, firstName: 'Timmeh', lastName: "Visse"});
+            //});
         }
 
         // Code for the preview page
@@ -248,7 +317,7 @@ $(document).on("pageshow", function() {
                     timeout: 10000,
                     success:function(data) {
                         // Show the error message if returned
-                        if(data.hasOwnProperty('error_msg')) {
+                        if(data.hasOwnProperty('error')) {
                             alert("A fatal error has been detected by Carbon CORE: Failed to parse guesses data.");
                             return;
                         }
