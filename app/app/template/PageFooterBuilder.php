@@ -31,8 +31,10 @@ class PageFooterBuilder {
 
     /**
      * Build and print the header.
+     *
+     * @param $fixed [optional] True if footer needs to be fixed, false if not.
      */
-    public function build() {
+    public function build($fixed = false) {
         // TODO: Remove coloring from OVRally
 
         // Define the footer background
@@ -58,7 +60,7 @@ class PageFooterBuilder {
         $footerDivStyle .= 'border-color: #' . $footerShadow . ';';
 
         // Print div opening tag, of the header
-        echo '<div data-role="footer" style="' . $footerDivStyle . '">';
+        echo '<div data-role="footer" style="' . $footerDivStyle . '"' . ($fixed ? 'data-position="fixed"' : '') . '>';
 
         // Print the title
         echo '<h1 style="color: #' . $footerColor . '; text-shadow: 0 1px 0 #' . $footerColorShadow . ';">' . static::$FOOTER_TITLE_DEFAULT . '</h1>';

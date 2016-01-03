@@ -22,6 +22,7 @@ if(isset($_GET['guess_step'])) {
     $guessStep = (int) $registerStepValue;
 }
 
+// Make sure the user isn't guessing more than it's allowed to
 if(!GuessManager::hasClientGuessesLeft())
     showErrorPage('Je hebt het maximum aantal schattingen op dit apparaat ingestuurd.');
 
@@ -141,6 +142,11 @@ elseif($guessStep == 3):
                 <input type="hidden" name="guess_first_name" value="<?=$firstName; ?>" />
                 <input type="hidden" name="guess_last_name" value="<?=$lastName; ?>" />
                 <input type="hidden" name="guess_mail" value="<?=$mail; ?>" />
+
+                <div data-role="main" class="ui-content" align="center">
+                    <img src="http://weknowyourdreams.com/images/cake/cake-05.jpg" style="max-height: 200px; max-width: 100%; box-shadow: 0 0 6px rgba(0, 0, 0, .35);" />
+                </div>
+                <br />
 
                 <label for="guess-weight">Gewicht in gram:</label>
                 <input name="guess_weight" id="guess-weight" value="<?=mt_rand(10, 4000); ?>" min="0" max="5000" step="0.1" data-highlight="true" type="range" data-popup-enabled="true">

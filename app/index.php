@@ -12,7 +12,14 @@ require_once('top.php');
     <div data-role="main" class="ui-content">
 
         <div data-role="main" class="ui-content" align="center">
-            <img src="style/image/logo/logo_original.png" style="height: 120px;" />
+            <img src="http://weknowyourdreams.com/images/cake/cake-05.jpg" style="max-height: 200px; max-width: 100%; box-shadow: 0 0 6px rgba(0, 0, 0, .35);" />
+        </div>
+
+        <div data-role="main" class="ui-content" align="center">
+            <p>Welkom bij de Mohicanen NJO van 2016.<br />
+                <br />
+                Weet jij hoe zwaar deze taart is?<br />
+                Stuur jouw schatting in en maak kans op het winnen van deze taart.</p>
         </div>
 
         <br />

@@ -71,7 +71,7 @@ $(document).on("pageshow", function() {
     // Get the active page ID
     var pageId = getActivePageId();
 
-    if(pageId == 'page-guess-send' || pageId == 'page-preview') {
+    if(pageId == 'page-guess-send' || pageId == 'page-preview' || pageId == 'page-screen') {
         // Create a new pusher instance
         var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
 
@@ -176,7 +176,7 @@ $(document).on("pageshow", function() {
         }
 
         // Code for the preview page
-        if(pageId == 'page-preview') {
+        if(pageId == 'page-preview' || pageId == 'page-screen') {
             // Create an array of guesses
             var guesses = [];
 
@@ -202,7 +202,9 @@ $(document).on("pageshow", function() {
                         formatter: function () {
                             return (this.value * graphSteps) + " gram"; // Proper xaxis name
                         },
-                        tickInterval: 2
+                        tickInterval: 2,
+                        fontSize: '60px',
+                        color: 'red'
                     }
                 },
                 yAxis: {
@@ -241,6 +243,7 @@ $(document).on("pageshow", function() {
                 legend: {
                     enabled: false
                 },
+                colors: ['#0067B2'],
                 credits: false
             };
 
@@ -260,9 +263,13 @@ $(document).on("pageshow", function() {
              * Update the table to put the 5 newest guesses in.
              */
             function updateTable() {
+                var rowCount = 5;
+                if(pageId == 'page-screen')
+                    rowCount = 8;
+
                 // Build the new table contents
                 var html = '';
-                for(var i = getGuessesCount() - 1; i >= Math.max(0, getGuessesCount() - 5); i--) {
+                for(var i = getGuessesCount() - 1; i >= Math.max(0, getGuessesCount() - rowCount); i--) {
                     html += "<tr>";
                     html += "<td>" + (i + 1) + "</td>\n";
                     html += "<td>" + guesses[i].firstName + "</td>";
