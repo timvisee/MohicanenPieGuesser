@@ -8,8 +8,6 @@ use app\util\AccountUtils;
 // Include the page top
 require_once('top.php');
 
-// TODO: Use tokens?
-
 // Get the register step
 $guessStep = 1;
 if(isset($_GET['guess_step'])) {
@@ -23,6 +21,8 @@ if(isset($_GET['guess_step'])) {
     // Set the register step
     $guessStep = (int) $registerStepValue;
 }
+
+// TODO: make sure the user can still guess
 
 if($guessStep == 1):
     if(!GuessManager::hasClientGuesses() || isset($_GET['ignoreWarning'])):
