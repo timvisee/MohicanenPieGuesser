@@ -23,7 +23,7 @@ require_once('top.php');
             <?php elseif(GuessManager::hasClientGuessesLeft()): ?>
                 <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
             <?php endif; ?>
-            <a href="preview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
+            <a href="overview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
         </fieldset>
 
         <?php if(GuessManager::hasClientGuesses()): ?>
