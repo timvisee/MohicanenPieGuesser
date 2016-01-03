@@ -63,29 +63,6 @@ CookieManager::setCookieDomain(Config::getValue('cookie', 'domain', ''));
 CookieManager::setCookiePath(Config::getValue('cookie', 'path', '/'));
 CookieManager::setCookiePrefix(Config::getValue('cookie', 'prefix', ''));
 
-// Set up the language manager
-use app\language\LanguageManager;
-LanguageManager::init(true, Registry::getValue('language.default.tag')->getValue());
-$languageTag = LanguageManager::getCookieLanguageTag();
-if($languageTag !== null)
-    LanguageManager::setCurrentLanguageTag($languageTag);
-
-// Setup a simplified language function
-/**
- * Get a language value for the current preferred language.
- *
- * @param string $section Value section.
- * @param string $key Value key.
- * @param string|null $default The default value, or null.
- *
- * @return string The language value, or the default.
- *
- * @throws Exception Throws if an error occurred.
- */
-function __($section, $key, $default = null) {
-    return LanguageManager::getValue($section, $key, $default);
-}
-
 // The app initialized successfully, define the APP_INIT_DONE constant to store the initialization state
 /** Defines whether the app is initialized successfully. */
 define('APP_INIT_DONE', true);
