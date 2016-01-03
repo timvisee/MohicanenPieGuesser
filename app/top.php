@@ -25,9 +25,9 @@ $site_root = '';
     <meta name="author" content="Tim Vis&eacute;e">
     <link rel="copyright" href="about.php">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#2A2A2A">
+    <meta name="theme-color" content="#0067B2">
     <meta name="application-name" content="<?=APP_NAME; ?>">
-    <meta name="msapplication-TileColor" content="#2a2a2a">
+    <meta name="msapplication-TileColor" content="#0067B2">
     <meta name="msapplication-config" content="<?=$site_root; ?>style/image/favicon/browserconfig.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="<?=APP_NAME; ?>">
