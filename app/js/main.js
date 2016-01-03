@@ -327,7 +327,7 @@ $(document).on("pageshow", function() {
             function refreshGuesses(showLoadingIndicator) {
                 // Show the indicator
                 if(showLoadingIndicator)
-                    showLoader("Schattingen verversen...");
+                    showLoader("Schattingen laden...");
 
                 // Make an AJAX request to load the station results
                 var currentRequest = $.ajax({
@@ -377,7 +377,7 @@ $(document).on("pageshow", function() {
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
-                    refreshGuesses(true);
+                    refreshGuesses(false);
                 }, 1000 * 60);
             }
 
