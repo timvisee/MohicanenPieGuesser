@@ -22,9 +22,12 @@ require_once('top.php');
         ?>
         <div data-role="main" class="ui-content">
 
+            <p>Hier vindt je het overzicht van alle ingestuurde schattingen.</p>
+            <br />
+
             <center>
                 <div id="guess-counter-container">
-                    Schattingen: <div id="guess-counter">?</div>
+                    Totaal aantal schattingen: <div id="guess-counter">?</div>
                 </div>
             </center>
 
@@ -32,6 +35,9 @@ require_once('top.php');
 
             <div id="guess-graph" style="height: 250px;"></div>
 
+            <br />
+
+            <p>Meest resente schattingen:</p>
             <br />
 
             <table data-role="table" id="guess-table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" >
