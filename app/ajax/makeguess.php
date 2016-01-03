@@ -11,10 +11,10 @@ if(!isset($_GET['guess_first_name']) || !isset($_GET['guess_last_name']) || !iss
     returnError("Received invalid data. Some parameters are missing.");
 
 // Get all parameters
-$firstName = $_POST['guess_first_name'];
-$lastName = $_POST['guess_first_name'];
-$mail = $_POST['guess_mail'];
-$weight = $_POST['guess_weight'];
+$firstName = $_GET['guess_first_name'];
+$lastName = $_GET['guess_last_name'];
+$mail = $_GET['guess_mail'];
+$weight = $_GET['guess_weight'];
 
 // Make sure the full name is valid
 if(!AccountUtils::isValidName($firstName) || !AccountUtils::isValidName($lastName))
