@@ -53,6 +53,9 @@ Config::load();
 use carbon\core\ErrorHandler;
 ErrorHandler::init(true, true, Config::getValue('app', 'debug'));
 
+// Start a PHP session
+session_start();
+
 // Connect to the database
 use app\database\Database;
 Database::connect();
