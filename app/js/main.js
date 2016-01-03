@@ -80,7 +80,6 @@ $(document).on("pageshow", function() {
 
         // Wait for the subscription to succeed
         if(pageId == 'page-guess-send') {
-
             /**
              * Make a guess based on the current values.
              */
@@ -96,16 +95,16 @@ $(document).on("pageshow", function() {
 
                 // Make a request to make the guess
                 var currentRequest = $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "ajax/makeguess.php",
+                    data: {
+                        guess_first_name: firstName,
+                        guess_last_name: lastName,
+                        guess_mail: mail,
+                        guess_weight: weight
+                    },
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    data: {
-                        firstName: firstName,
-                        lastName: lastName,
-                        mail: mail,
-                        weight: weight
-                    },
                     timeout: 10000,
                     success:function(data) {
                         // Show the error message if returned
@@ -114,11 +113,20 @@ $(document).on("pageshow", function() {
                             return;
                         }
 
+                        // Show a status message
+                        showLoader("Schatting verwerken...");
+
                         // Send the guess
                         sendGuess(firstName, lastName, weight);
 
-                        // Continue to the overview
-                        window.location.href = 'overview.php';
+                        // Continue to the overview page
+                        setTimeout(function() {
+                            // Hide the loading indicator
+                            hideLoader();
+
+                            // Continue
+                            jQuery.mobile.navigate('overview.php');
+                        }, 500);
                     },
                     error: function(msg) {
                         // An error occurred, show a status message
@@ -148,6 +156,12 @@ $(document).on("pageshow", function() {
                     firstName: firstName,
                     lastName: lastName});
             }
+
+            // Execute the make guess method when the make guess button is pressed
+            $('#make-guess-button').click(function() {
+                makeGuess();
+                return false;
+            });
 
             //channel.bind('pusher:subscription_succeeded', function() {
             //    // Determine a random weight

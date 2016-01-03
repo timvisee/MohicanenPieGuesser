@@ -209,7 +209,7 @@ elseif($guessStep == 4):
                 <input type="hidden" name="guess_mail" value="<?=$mail; ?>" />
                 <input type="hidden" name="guess_weight" value="<?=$weight; ?>" />
 
-                <input type="submit" value="Schatting insturen" class="ui-btn ui-icon-check ui-btn-icon-right" />
+                <input id="make-guess-button" type="submit" value="Schatting insturen" class="ui-btn ui-icon-check ui-btn-icon-right" />
             </form>
         </div>
 
@@ -245,7 +245,7 @@ elseif($guessStep == 5):
     GuessManager::createGuess($firstName, $lastName, $mail, $weight);
 
     ?>
-    <div data-role="page" id="page-register" data-unload="false">
+    <div data-role="page" id="page-guess-done" data-unload="false">
         <?php PageHeaderBuilder::create("Schatting ingestuurd")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
