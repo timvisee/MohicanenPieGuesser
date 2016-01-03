@@ -40,7 +40,7 @@ class AccountUtils {
      *
      * @return bool True if the full name is valid, false otherwise.
      */
-    public static function isValidFullName($fullName) {
+    public static function isValidName($fullName) {
         // Make sure the name is a string
         if(!is_string($fullName))
             return false;
@@ -53,6 +53,6 @@ class AccountUtils {
             return false;
 
         // Make sure the name is at least 3 chars long
-        return strlen($fullName) >= 3;
+        return strlen($fullName) >= 2 && strlen($fullName) <= 128;
     }
 }
