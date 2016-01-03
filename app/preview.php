@@ -8,7 +8,17 @@ require_once('top.php');
 
 ?>
     <div data-role="page" id="page-preview">
-        <?php PageHeaderBuilder::create()->build(); ?>
+        <?php
+        // Construct the builder
+        $builder = PageHeaderBuilder::create();
+
+        // Check whether to add a back button
+        if(isset($_GET['back']))
+            $builder->setBackButton('index.php');
+
+        // Build the header
+        $builder->build();
+        ?>
         <div data-role="main" class="ui-content">
 
             <center>

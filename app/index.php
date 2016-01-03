@@ -19,6 +19,7 @@ require_once('top.php');
 
         <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
             <a href="guess.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Gewicht raden</a>
+            <a href="preview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
         </fieldset>
     </div>
 
