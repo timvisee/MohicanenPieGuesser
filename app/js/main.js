@@ -96,9 +96,9 @@ $(document).on("pageshow", function() {
             connectionIndicator.removeClass('none');
 
             // Update the indicator
-            if(state == 'initialized')
+            if(state == 'initialized' || state == 'unavailable')
                 connectionIndicator.addClass('none');
-            else if(state == 'connecting' || state == 'unavailable')
+            else if(state == 'connecting')
                 connectionIndicator.addClass('unstable');
             else if(state == 'connected')
                 connectionIndicator.addClass('connected');
