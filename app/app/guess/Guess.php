@@ -142,7 +142,7 @@ class Guess {
      * @throws Exception Throws an exception if an error occurred.
      */
     public function getWeight() {
-        return $this->getDatabaseValue('guess_weight');
+        return (float) $this->getDatabaseValue('guess_weight');
     }
 
     /**
