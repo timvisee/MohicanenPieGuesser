@@ -25,6 +25,10 @@ require_once('top.php');
                 <td><?=GuessManager::getGuessCount(); ?></td>
             </tr>
             <tr>
+                <td>Sessie</td>
+                <td><?=session_id(); ?></td>
+            </tr>
+            <tr>
                 <td><?=__('pageStatus', 'uptime'); ?></td>
                 <td><?php
                     if(function_exists('sys_getloadavg')) {
