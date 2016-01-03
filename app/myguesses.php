@@ -41,7 +41,7 @@ require_once('top.php');
                             // Print the guess in the table
                             echo '<tr><td>' . $guess->getFirstName() . ' ' . $guess->getLastName() . '</td>';
                             echo '<td>' . $guess->getMail() . '</td>';
-                            echo '<td>' . $guess->getWeight() . ' kilogram</td></tr>';
+                            echo '<td>' . $guess->getWeight() . ' gram</td></tr>';
                         }
                         ?>
                     </tbody>

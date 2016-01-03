@@ -113,8 +113,8 @@ elseif($guessStep == 3):
                 <input type="hidden" name="guess_last_name" value="<?=$lastName; ?>" />
                 <input type="hidden" name="guess_mail" value="<?=$mail; ?>" />
 
-                <label for="guess-weight">Gewicht in kilogram:</label>
-                <input name="guess_weight" id="guess-weight" value="5" min="0" max="25" step="0.001" data-highlight="true" type="range">
+                <label for="guess-weight">Gewicht in gram:</label>
+                <input name="guess_weight" id="guess-weight" value="5" min="0" max="5000" step="0.1" data-highlight="true" type="range">
 
                 <br />
 
@@ -167,7 +167,7 @@ elseif($guessStep == 4):
                     </tr>
                     <tr>
                         <td>Schatting</td>
-                        <td><?=$weight; ?> kilogram</td>
+                        <td><?=$weight; ?> gram</td>
                     </tr>
                 </table>
             </center>

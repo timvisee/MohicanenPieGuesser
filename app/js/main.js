@@ -97,6 +97,11 @@ $(document).on("pageshow", function() {
             // Create an array of guesses
             var guesses = [];
 
+            // Set the step on the xaxis used in the graph and the minimum and maximum values
+            var graphSteps = 100;
+            var min = 0;
+            var max = 5000;
+
             // Define the chart options
             var chartOptions = {
                 chart: {
@@ -112,19 +117,24 @@ $(document).on("pageshow", function() {
                     allowDecimals: false,
                     labels: {
                         formatter: function () {
-                            return this.value + " KG"; // clean, unformatted number for year
+                            return (this.value * graphSteps) + " gram"; // Proper xaxis name
                         },
                         tickInterval: 2
                     }
                 },
                 yAxis: {
                     title: {
-                        text: 'Aantal schattingen per kilogram'
+                        text: 'Aantal schattingen per gram'
                     },
                     tickInterval: 1
                 },
                 tooltip: {
-                    pointFormat: '<b>{point.y:,.0f}</b> schattingen'
+                    formatter: function() {
+                        return '<b>' + Math.max(((this.x * graphSteps) - (graphSteps / 2)), min) + '</b> tot <b>' +
+                            Math.min(((this.x * graphSteps) + (graphSteps / 2)), max) + '</b> gram<br /><b>' + this.y + '</b> schatting' +
+                            (this.y != 1 ? 'en' : '');
+                    },
+                    crosshairs: [true]
                 },
                 plotOptions: {
                     areaspline: {
@@ -173,7 +183,7 @@ $(document).on("pageshow", function() {
                     html += "<tr>";
                     html += "<td>" + (i + 1) + "</td>\n";
                     html += "<td>" + guesses[i].firstName + "</td>";
-                    html += "<td>" + guesses[i].weight + " kilogram</td>";
+                    html += "<td>" + guesses[i].weight + " gram</td>";
                     html += "</tr>";
                 }
 
@@ -193,20 +203,18 @@ $(document).on("pageshow", function() {
              * Update the graph with the newest data
              */
             function updateGraph() {
-                // Define the for loop index, and the minimum/maximum value
+                // Define the for loop index
                 var i;
-                var min = 0;
-                var max = 25;
 
                 // Get the chart options
                 chartOptions = chart.options;
 
                 // Generate the chart data
                 var data = [];
-                for(i = min; i <= max; i++)
+                for(i = min; i <= max / graphSteps; i++)
                     data.push(0);
                 for(i = 0; i < getGuessesCount(); i++)
-                    data[Math.round(guesses[i].weight) - min]++;
+                    data[Math.round(guesses[i].weight / graphSteps) - min]++;
 
                 // Set the chart data
                 chart.series[0].setData(data, true);
@@ -302,7 +310,7 @@ $(document).on("pageshow", function() {
             channel.bind('client-newGuess', function(data) {
                 // Add the data to the list of guesses
                 guesses.push({firstName: data.firstName, lastName: data.lastName, weight: data.weight});
-                //alert('CLIENT: Name: ' + data.firstName + ' ' + data.lastName + '; Weight: ' + data.weight + ' KG');
+                //alert('CLIENT: Name: ' + data.firstName + ' ' + data.lastName + '; Weight: ' + data.weight + ' gram');
 
                 // Update everything
                 updateAll();
