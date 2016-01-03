@@ -11,13 +11,19 @@ require_once('top.php');
     <?php PageHeaderBuilder::create()->build(); ?>
     <div data-role="main" class="ui-content">
 
+        <div data-role="main" class="ui-content" align="center">
+            <img src="style/image/logo/logo_original.png" style="height: 120px;" />
+            <br />
+            <br />
+        </div>
+
         <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-            <a href="guess.php" class="ui-btn ui-icon-user ui-btn-icon-left">Gewicht raden</a>
+            <a href="guess.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Gewicht raden</a>
         </fieldset>
     </div>
-    <?php
 
-    // Build the footer and sidebar
+    <?php
+    // Build the footer
     PageFooterBuilder::create()->build();
     ?>
 </div>
