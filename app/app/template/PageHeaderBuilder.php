@@ -257,8 +257,10 @@ class PageHeaderBuilder {
 
     /**
      * Build and print the header.
+     *
+     * @param $connectionIndicator [optional] True to show a connection indicator, false if not.
      */
-    public function build() {
+    public function build($connectionIndicator = false) {
         // TODO: Remove coloring from OVRally
 
         // Define the header background
@@ -298,6 +300,10 @@ class PageHeaderBuilder {
             // TODO: This is temporary
             echo '<a id="start-tutorial" href="#" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-info">Start test tutorial</a>';
         }
+
+        // Add a connection indicator
+        if($connectionIndicator)
+            echo '<div id="connection-indicator" class="disconnected"></div>';
 
         // Show the menu button if set
         if($this->hasCloseButton())

@@ -18,7 +18,7 @@ require_once('top.php');
             $builder->setBackButton('index.php');
 
         // Build the header
-        $builder->build();
+        $builder->build(true);
         ?>
         <div data-role="main" class="ui-content">
 

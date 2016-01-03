@@ -419,3 +419,26 @@ input.ui-btn.ui-btn-active {
 #page-screen tr {
     font-size: 120%;
 }
+
+#connection-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 16px;
+    float: right;
+    margin: 15px;
+}
+
+#connection-indicator.connected {
+    background-color: #00ad00;
+    box-shadow: 0 0 6px #00ba00;
+}
+
+#connection-indicator.disconnected {
+    background-color: #ba000c;
+    box-shadow: 0 0 6px #ff2f31;
+}
+
+#connection-indicator.unstable {
+    background-color: #a3a2a1;
+    box-shadow: 0 0 6px #a7a6a5;
+}

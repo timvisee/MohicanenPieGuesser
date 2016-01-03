@@ -75,6 +75,45 @@ $(document).on("pageshow", function() {
         // Create a new pusher instance
         var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
 
+        /**
+         * Update the connection state.
+         */
+        function updateConnectionState() {
+            // Get the state
+            var state = pusher.connection.state;
+
+            // Get the connection state object
+            var connectionIndicator = $('#connection-indicator');
+
+            // Make sure a connection indicator is available
+            if(connectionIndicator.length <= 0)
+                return;
+
+            // Remove all states
+            connectionIndicator.removeClass('connected');
+            connectionIndicator.removeClass('disconnected');
+            connectionIndicator.removeClass('unstable');
+            connectionIndicator.removeClass('none');
+
+            // Update the indicator
+            if(state == 'initialized')
+                connectionIndicator.addClass('none');
+            else if(state == 'connecting')
+                connectionIndicator.addClass('unstable');
+            else if(state == 'connected')
+                connectionIndicator.addClass('connected');
+            else if(state == 'unavailable' || state == 'failed' || state == 'disconnected')
+                connectionIndicator.addClass('disconnected');
+        }
+
+        // Register all events for connections
+        pusher.connection.bind('initialized', function() { updateConnectionState(); });
+        pusher.connection.bind('connecting', function() { updateConnectionState(); });
+        pusher.connection.bind('connected', function() { updateConnectionState(); });
+        pusher.connection.bind('unavailable', function() { updateConnectionState(); });
+        pusher.connection.bind('failed', function() { updateConnectionState(); });
+        pusher.connection.bind('disconnected', function() { updateConnectionState(); });
+
         // Subscribe to the guess updates channel
         var channel = pusher.subscribe('private-guessUpdates');
 

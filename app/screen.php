@@ -10,7 +10,7 @@ require_once('top.php');
     <div data-role="page" id="page-screen">
         <?php
         // Construct the builder
-        PageHeaderBuilder::create('Mohicanen NJO&nbsp;&nbsp;&middot;&nbsp;&nbsp;Hoe zwaar is de taart?')->build();
+        PageHeaderBuilder::create('Mohicanen NJO&nbsp;&nbsp;&middot;&nbsp;&nbsp;Hoe zwaar is de taart?')->build(true);
         ?>
         <div data-role="main" class="ui-content">
 
