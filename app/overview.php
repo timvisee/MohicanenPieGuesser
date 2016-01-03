@@ -37,7 +37,7 @@ require_once('top.php');
 
             <br />
 
-            <p>Meest resente schattingen:</p>
+            <p>Meest recente schattingen:</p>
             <br />
 
             <table data-role="table" id="guess-table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" >
