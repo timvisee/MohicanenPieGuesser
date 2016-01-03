@@ -17,7 +17,7 @@ $site_root = '';
 <html>
 <head>
 
-    <title>Mohicanen Pie Guesser</title>
+    <title>Mohicanen &middot; Taart raden</title>
 
     <!-- Meta -->
     <meta charset="UTF-8">
