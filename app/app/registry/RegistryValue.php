@@ -10,7 +10,7 @@ use PDO;
 // Prevent direct requests to this file due to security reasons
 defined('APP_INIT') or die('Access denied!');
 
-class RegistryValue{
+class RegistryValue {
 
     /** @var int The registry value ID. */
     private $id;

@@ -4,6 +4,7 @@ namespace app\guess;
 
 use app\config\Config;
 use app\database\Database;
+use app\registry\Registry;
 use app\util\AccountUtils;
 use carbon\core\datetime\DateTime;
 use carbon\core\util\IpUtils;
@@ -181,6 +182,22 @@ class GuessManager {
 
         // Return the number of guesses for this session ID
         return $statement->rowCount();
+    }
+
+    public static function hasClientGuesses() {
+        return GuessManager::getClientGuessCount() > 0;
+    }
+
+    public static function getClientGuessCount() {
+        return self::getGuessesWithSessionIdCount(session_id());
+    }
+
+    public static function getClientGuessesLeft() {
+        return max(((int) Registry::getValue('client.maxEntries')->getValue()) - self::getClientGuessCount(), 0);
+    }
+
+    public static function hasClientGuessesLeft() {
+        return self::getClientGuessesLeft() > 0;
     }
 
     /**
