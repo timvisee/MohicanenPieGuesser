@@ -226,7 +226,7 @@ elseif($guessStep == 5):
     $firstName = htmlentities(trim($_POST['guess_first_name']));
     $lastName = htmlentities(trim($_POST['guess_last_name']));
     $mail = htmlentities(trim($_POST['guess_mail']));
-    $weight = htmlentities(trim($_POST['guess_weight']));
+    $weight = (float) $_POST['guess_weight'];
 
     // Make sure the full name is valid
     if(!AccountUtils::isValidName($firstName) || !AccountUtils::isValidName($lastName))
@@ -242,20 +242,22 @@ elseif($guessStep == 5):
     // TODO: Make sure the guessed value is valid!
 
     // Create the user
-    UserManager::createUser($username, $password, $mail, $firstName);
+    GuessManager::createGuess($firstName, $lastName, $mail, $weight);
 
     ?>
     <div data-role="page" id="page-register" data-unload="false">
-        <?php PageHeaderBuilder::create(__('account', 'register'))->setBackButton('index.php')->build(); ?>
+        <?php PageHeaderBuilder::create("Schatting ingestuurd")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
             <p>
-                <?=__('general', 'welcome'); ?> <?=$firstName; ?>!<br />
-                <br />
-                <?=__('register', 'registeredSuccessfullyVerifyMail'); // TODO: Show a note, that the mail address must be activated within a specific period! ?>
+                Je schatting is succesvol ingestuurd! We nemen contact met je op via het opgegeven E-mail adres als je de gelukkige winnaar bent.
             </p><br />
 
-            <fieldset data-role="controlgroup" data-type="vertical">
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="overview.php" class="ui-btn ui-icon-home ui-btn-icon-left">Overzicht bekijken</a>
+            </fieldset>
+
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                 <a href="index.php" data-ajax="false" class="ui-btn ui-icon-home ui-btn-icon-left" data-direction="reverse"><?=__('navigation', 'goToFrontPage'); ?></a>
             </fieldset>
         </div>
