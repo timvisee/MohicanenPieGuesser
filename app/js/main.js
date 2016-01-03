@@ -120,10 +120,11 @@ $(document).on("pageshow", function() {
                 yAxis: {
                     title: {
                         text: 'Aantal schattingen per kilogram'
-                    }
+                    },
+                    tickInterval: 1
                 },
                 tooltip: {
-                    pointFormat: '<b>{point.y:,.0f}</b> mensen geschat'
+                    pointFormat: '<b>{point.y:,.0f}</b> schattingen'
                 },
                 plotOptions: {
                     areaspline: {
