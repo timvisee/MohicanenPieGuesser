@@ -25,6 +25,12 @@ require_once('top.php');
             <?php endif; ?>
             <a href="preview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
         </fieldset>
+
+        <?php if(GuessManager::hasClientGuesses()): ?>
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
+            </fieldset>
+        <?php endif; ?>
     </div>
 
     <?php PageFooterBuilder::create()->build(); ?>

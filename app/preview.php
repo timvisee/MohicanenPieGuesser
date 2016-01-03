@@ -49,10 +49,13 @@ require_once('top.php');
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                 <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
-                <?php if(GuessManager::hasClientGuessesLeft()): ?>
-                    <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
-                <?php endif; ?>
             </fieldset>
+
+            <?php if(GuessManager::hasClientGuessesLeft()): ?>
+                <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                    <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
+                </fieldset>
+            <?php endif; ?>
         </div>
 
         <?php PageFooterBuilder::create()->build(); ?>
