@@ -110,7 +110,7 @@ function showErrorPage($errorMsg = null) {
             <div data-role="main" class="ui-content">
                 <p><?=$errorMsg; ?></p><br />
 
-                <fieldset data-role="controlgroup" data-type="vertical">
+                <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                     <a href="index.php" data-ajax="false" data-rel="back" class="ui-btn ui-icon-back ui-btn-icon-left" data-direction="reverse"><?=__('navigation', 'goBack'); ?></a>
                 </fieldset>
             </div>
