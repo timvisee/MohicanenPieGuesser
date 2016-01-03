@@ -77,7 +77,7 @@ $site_root = '';
     <script src="//js.pusher.com/3.0/pusher.min.js"></script>
 
     <!-- Library: Highcharts -->
-    <script src="https://code.highcharts.com"></script>
+    <script src="//code.highcharts.com/highcharts.js"></script>
 
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="<?=$site_root; ?>style/style.css">
