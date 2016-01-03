@@ -1,7 +1,6 @@
 <?php
 
 use app\config\Config;
-use app\language\LanguageManager;
 use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 
