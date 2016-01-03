@@ -56,7 +56,7 @@ require_once('top.php');
 
             <center>
                 <div id="guess-counter-container">
-                    Totaal aantal chattingen: <div id="guess-counter">?</div>
+                    Totaal aantal schattingen: <div id="guess-counter">?</div>
                 </div>
             </center>
         </div>
