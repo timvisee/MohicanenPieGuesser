@@ -121,12 +121,12 @@ $(document).on("pageshow", function() {
 
                         // Continue to the overview page
                         setTimeout(function() {
-                            // Hide the loading indicator
-                            hideLoader();
-
                             // Continue
                             jQuery.mobile.navigate('overview.php');
-                        }, 500);
+
+                            // Hide the loading indicator
+                            hideLoader();
+                        }, 150);
                     },
                     error: function(msg) {
                         // An error occurred, show a status message
@@ -262,7 +262,7 @@ $(document).on("pageshow", function() {
             function updateTable() {
                 // Build the new table contents
                 var html = '';
-                for(var i = Math.max(0, getGuessesCount() - 5); i < getGuessesCount(); i++) {
+                for(var i = getGuessesCount() - 1; i >= Math.max(0, getGuessesCount() - 5); i--) {
                     html += "<tr>";
                     html += "<td>" + (i + 1) + "</td>\n";
                     html += "<td>" + guesses[i].firstName + "</td>";
