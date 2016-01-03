@@ -23,7 +23,7 @@ require_once('top.php');
 
             <center>
                 <div id="guess-counter-container">
-                    Schattingen: <div id="guess-counter">0</div>
+                    Schattingen: <div id="guess-counter">?</div>
                 </div>
             </center>
 
