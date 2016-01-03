@@ -23,7 +23,7 @@ require_once('top.php');
 
             <br />
 
-            <table data-role="table" id="table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" >
+            <table data-role="table" id="guess-table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" >
                 <thead>
                 <tr class="ui-bar-d">
                     <th>#</th>
