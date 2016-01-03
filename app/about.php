@@ -13,7 +13,7 @@ require_once('top.php');
 
     <div data-role="main" class="ui-content" align="center">
         <br />
-        <img src="style/image/logo/logo_big.png" style="height: 120px;" />
+        <img src="style/image/logo/logo_original.png" style="height: 120px;" />
         <br />
         <br />
 
