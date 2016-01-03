@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `mpg_guess` (
   `guess_first_name` varchar(255) NOT NULL,
   `guess_last_name` varchar(255) NOT NULL,
   `guess_mail` text NOT NULL,
-  `guess_weight` decimal(25,0) NOT NULL,
+  `guess_weight` decimal(10,5) NOT NULL,
   `guess_datetime` datetime NOT NULL,
   `guess_ip` tinytext NOT NULL,
   PRIMARY KEY (`guess_id`)
