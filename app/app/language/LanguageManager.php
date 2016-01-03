@@ -29,7 +29,7 @@ class LanguageManager {
     /** @var array List of loaded languages. */
     private static $languages = Array();
     /** @var string The default language tag used when not specified. */
-    private static $defaultTag = 'en-US';
+    private static $defaultTag = 'nl-NL';
     /** @var string|null The preferred language that should currently be used, or null if undefined. */
     private static $currentTag = null;
 
