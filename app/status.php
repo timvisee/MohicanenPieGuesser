@@ -69,10 +69,7 @@ require_once('top.php');
         </script>
     </div>
 
-    <?php
-    // Build the footer and sidebar
-    PageFooterBuilder::create()->build();
-    ?>
+    <?php PageFooterBuilder::create()->build(); ?>
 </div>
 <?php
 

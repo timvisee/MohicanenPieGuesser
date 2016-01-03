@@ -36,10 +36,7 @@ require_once('top.php');
         <p>Copyright &copy; Tim Vis&eacute;e <?=date('Y'); ?>.<br />All rights reserved.</p>
     </div>
 
-    <?php
-    // Build the footer and sidebar
-    PageFooterBuilder::create()->build();
-    ?>
+    <?php PageFooterBuilder::create()->build(); ?>
 </div>
 
 <?php

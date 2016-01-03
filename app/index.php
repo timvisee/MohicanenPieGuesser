@@ -7,7 +7,7 @@ use app\template\PageHeaderBuilder;
 require_once('top.php');
 
 ?>
-<div data-role="page" id="page-login">
+<div data-role="page" id="page-main">
     <?php PageHeaderBuilder::create()->build(); ?>
     <div data-role="main" class="ui-content">
 
@@ -22,10 +22,7 @@ require_once('top.php');
         </fieldset>
     </div>
 
-    <?php
-    // Build the footer
-    PageFooterBuilder::create()->build();
-    ?>
+    <?php PageFooterBuilder::create()->build(); ?>
 </div>
 <?php
 
