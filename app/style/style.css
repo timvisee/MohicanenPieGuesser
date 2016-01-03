@@ -119,15 +119,6 @@ body {
   /*border: 1px solid #AAA;*/
   border-radius: 8px; }
 
-table tr td {
-  text-align: left;
-  line-height: 1.8em; }
-
-table tr td:first-child {
-  padding-right: 16px;
-  font-weight: bold;
-  text-align: right; }
-
 img.static-map {
   width: 100%;
   max-width: 350px;
@@ -286,5 +277,15 @@ hr {
 
 #account-selector {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15); }
+
+/** UI improvements. */
+h1.ui-title {
+  margin: 0 95px !important; }
+
+#guess-counter-container {
+  font-size: 125%; }
+
+#guess-counter {
+  display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */

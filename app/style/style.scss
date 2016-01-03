@@ -143,16 +143,16 @@ body {
     border-radius: 8px;
 }
 
-table tr td {
-    text-align: left;
-    line-height: 1.8em;
-}
-
-table tr td:first-child {
-    padding-right: 16px;
-    font-weight: bold;
-    text-align: right;
-}
+//table tr td {
+//    text-align: left;
+//    line-height: 1.8em;
+//}
+//
+//table tr td:first-child {
+//    padding-right: 16px;
+//    font-weight: bold;
+//    text-align: right;
+//}
 
 img.static-map {
     width: 100%;
@@ -360,5 +360,12 @@ hr {
 /** UI improvements. */
 h1.ui-title {
     margin: 0 95px !important;
-    background-color: green !important;
+}
+
+#guess-counter-container {
+    font-size: 125%;
+}
+
+#guess-counter {
+    display: inline-block;
 }
