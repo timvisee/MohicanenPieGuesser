@@ -1,5 +1,6 @@
 <?php
 
+use app\guess\GuessManager;
 use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 
@@ -20,12 +21,6 @@ require_once('top.php');
         $builder->build();
         ?>
         <div data-role="main" class="ui-content">
-
-            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-                <a href="myguesses.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Mijn schattingen</a>
-            </fieldset>
-
-            <br />
 
             <center>
                 <div id="guess-counter-container">
@@ -49,6 +44,15 @@ require_once('top.php');
                 </thead>
                 <tbody></tbody>
             </table>
+
+            <br />
+
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
+                <?php if(GuessManager::hasClientGuessesLeft()): ?>
+                    <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
+                <?php endif; ?>
+            </fieldset>
         </div>
 
         <?php PageFooterBuilder::create()->build(); ?>

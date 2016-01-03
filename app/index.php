@@ -1,6 +1,6 @@
 <?php
 
-use app\template\PageFooterBuilder;
+use app\guess\GuessManager;use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 
 // Include the page top
@@ -13,12 +13,16 @@ require_once('top.php');
 
         <div data-role="main" class="ui-content" align="center">
             <img src="style/image/logo/logo_original.png" style="height: 120px;" />
-            <br />
-            <br />
         </div>
 
+        <br />
+
         <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-            <a href="guess.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Gewicht raden</a>
+            <?php if(!GuessManager::hasClientGuesses()): ?>
+                <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting insturen</a>
+            <?php elseif(GuessManager::hasClientGuessesLeft()): ?>
+                <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
+            <?php endif; ?>
             <a href="preview.php?back" class="ui-btn ui-icon-info ui-btn-icon-left">Overzicht bekijken</a>
         </fieldset>
     </div>

@@ -55,7 +55,11 @@ require_once('top.php');
                 ?>
                 <br />
                 <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-                    <a href="guess.php" class="ui-btn ui-icon-carat-r ui-btn-icon-left">Schatting insturen</a>
+                    <?php if(!GuessManager::hasClientGuesses()): ?>
+                        <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting insturen</a>
+                    <?php elseif(GuessManager::hasClientGuessesLeft()): ?>
+                        <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
+                    <?php endif; ?>
                 </fieldset>
                 <?php
             }
