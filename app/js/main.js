@@ -86,3 +86,37 @@ function showLoader(msgText) {
 function hideLoader() {
     $.mobile.loading("hide");
 }
+
+
+
+
+
+
+// TODO: Make sure this code only works on pages the sidebar is available on
+$(document).on("pageshow", function() {
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+        if (window.console && window.console.log) {
+            window.console.log(message);
+        }
+    };
+
+    if(getActivePageId() == 'page-guess-send') {
+        // Create a new pusher instance
+        var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
+
+        // Subscribe to the guess updates channel
+        var channel = pusher.subscribe('private-guessUpdates');
+
+        // Bind to the channel to process updates
+        channel.bind('client-newGuess', function(data) {
+            alert('CLIENT: Name: ' + data.firstName + ' ' + data.lastName + '; Weight: ' + data.weight + ' KG');
+        });
+
+        // Wait for the subscription to succeed
+        channel.bind('pusher:subscription_succeeded', function() {
+            // Trigger a debug event
+            channel.trigger('client-newGuess', {weight: '123', firstName: 'Timmeh', lastName: "Visse"});
+        });
+    }
+});
