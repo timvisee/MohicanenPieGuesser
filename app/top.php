@@ -73,6 +73,9 @@ $site_root = '';
     <link rel="stylesheet" href="<?=$site_root; ?>lib/jquery-mobile/jquery.mobile-1.4.5.min.css" />
     <script src="<?=$site_root; ?>lib/jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 
+    <!-- Library: Pusher -->
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="<?=$site_root; ?>style/style.css">
 
