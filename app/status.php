@@ -1,5 +1,6 @@
 <?php
 
+use app\guess\GuessManager;
 use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 use app\template\PageSidebarBuilder;
@@ -14,10 +15,14 @@ require_once('top.php');
     <div data-role="main" class="ui-content" align="center">
         <p><?=__('pageStatus', 'currentStatusShownBelow'); ?></p><br />
 
-        <table class="ui-responsive">
+        <table class="ui-responsive list-table">
             <tr>
                 <td><?=__('general', 'database'); ?></td>
                 <td><span style="color: green;">Connected!</span></td>
+            </tr>
+            <tr>
+                <td>Schattingen</td>
+                <td><?=GuessManager::getGuessCount(); ?></td>
             </tr>
             <tr>
                 <td><?=__('pageStatus', 'uptime'); ?></td>

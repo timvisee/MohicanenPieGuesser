@@ -106,7 +106,7 @@ elseif($guessStep == 3):
         <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
-            <p>Vul hier onder naar uw schatting het gewicht van de taart in.</p><br />
+            <p>Vul hier onder naar uw schatting het gewicht van de taart in. </p><br />
 
             <form method="GET" action="guess.php?guess_step=4">
                 <input type="hidden" name="guess_first_name" value="<?=$firstName; ?>" />
@@ -152,7 +152,7 @@ elseif($guessStep == 4):
 
         <div data-role="main" class="ui-content">
             <center>
-                <table class="ui-responsive">
+                <table class="ui-responsive list-table">
                     <tr>
                         <td><?=__('account', 'firstName'); ?></td>
                         <td><?=$firstName; ?></td>

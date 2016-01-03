@@ -119,6 +119,15 @@ body {
   /*border: 1px solid #AAA;*/
   border-radius: 8px; }
 
+table.list-table tr td {
+  text-align: left;
+  line-height: 1.8em; }
+
+table.list-table tr td:first-child {
+  padding-right: 16px;
+  font-weight: bold;
+  text-align: right; }
+
 img.static-map {
   width: 100%;
   max-width: 350px;
