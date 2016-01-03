@@ -290,14 +290,14 @@ class GuessManager {
         // Prepare a query for the picture being added
         $statement = Database::getPDO()->prepare('INSERT INTO ' . static::getDatabaseTableName() .
             ' (guess_session_id, guess_first_name, guess_last_name, guess_mail, guess_weight, guess_datetime, guess_ip) ' .
-            'VALUES (:session_id, :first_name, :last_name, :mail, :weight, :datetime, :ip)');
+            'VALUES (:session_id, :first_name, :last_name, :mail, :weight, :guess_datetime, :ip)');
         $statement->bindValue(':session_id', $sessionId, PDO::PARAM_STR);
         $statement->bindValue(':first_name', $firstName, PDO::PARAM_STR);
         $statement->bindValue(':last_name', $lastName, PDO::PARAM_STR);
         $statement->bindValue(':mail', $mail, PDO::PARAM_STR);
-        $statement->bindValue(':weight', $dateTime->toString(), PDO::PARAM_STR);
+        $statement->bindValue(':weight', $weight, PDO::PARAM_STR);
         // TODO: Use the UTC/GMT timezone!
-        $statement->bindValue(':datetime', $dateTime, PDO::PARAM_STR);
+        $statement->bindValue(':guess_datetime', $dateTime->toString(), PDO::PARAM_STR);
         $statement->bindValue(':ip', $ip, PDO::PARAM_STR);
 
         // Execute the prepared query
