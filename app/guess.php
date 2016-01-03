@@ -68,7 +68,7 @@ elseif($guessStep == 2):
         <div data-role="main" class="ui-content">
             <p><?=__('general', 'hello'); ?> <?=$_GET['guess_first_name']; ?>!</p><br />
 
-            <p>Vul hier onder jouw E-mail adres in zodat we contact met je op kunnen nemen als je de gelukkige winnaar bent.</p><br />
+            <p>Vul hier onder jouw E-mail adres in zodat we contact met je op kunnen nemen als je de gelukkige winnaar bent. Je E-mail adres is niet zichtbaar voor andere spelers.</p><br />
 
             <form method="GET" action="guess.php?guess_step=3">
                 <input type="hidden" name="guess_first_name" value="<?=$firstName; ?>" />
@@ -106,7 +106,8 @@ elseif($guessStep == 3):
         <?php PageHeaderBuilder::create("Gewicht raden")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
-            <p>Vul hier onder naar uw schatting het gewicht van de taart in. Gebruik het tekstvakje om een precieze waarde in te vullen.</p><br />
+            <p>Vul hier onder naar uw schatting het gewicht van de taart in. Gebruik het tekstvakje om een precieze waarde in te vullen.<br /><br />
+                <i><?=__('general', 'note'); ?>: Je kunt je schatting later niet meer aanpassen.</i></p><br />
 
             <form method="GET" action="guess.php?guess_step=4">
                 <input type="hidden" name="guess_first_name" value="<?=$firstName; ?>" />
@@ -114,7 +115,7 @@ elseif($guessStep == 3):
                 <input type="hidden" name="guess_mail" value="<?=$mail; ?>" />
 
                 <label for="guess-weight">Gewicht in gram:</label>
-                <input name="guess_weight" id="guess-weight" value="5" min="0" max="5000" step="0.1" data-highlight="true" type="range">
+                <input name="guess_weight" id="guess-weight" value="<?=mt_rand(10, 4000); ?>" min="0" max="5000" step="0.1" data-highlight="true" type="range" data-popup-enabled="true">
 
                 <br />
 
