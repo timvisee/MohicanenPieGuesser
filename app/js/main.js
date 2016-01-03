@@ -1,35 +1,3 @@
-// The page refresh timer instance
-var pageRefreshTimer = null;
-
-/**
- * Start or restart the refresh timer.
- */
-function startRefreshTimer() {
-    // Stop the current timer
-    stopRefreshTimer();
-
-    // Set up the timer
-    pageRefreshTimer = setInterval(function() {
-        if(getActivePageId() != 'page-map') {
-            showLoader('Refreshing page...');
-            refreshPage();
-            hideLoader();
-        }
-    }, 1000 * 60 * 2);
-}
-
-/**
- * Stop the refresh timer.
- */
-function stopRefreshTimer() {
-    // Clear the timer
-    if(pageRefreshTimer != null)
-        clearInterval(pageRefreshTimer);
-
-    // Reset the variable
-    pageRefreshTimer = null;
-}
-
 /**
  * Get the ID of the current active page.
  *
@@ -199,7 +167,7 @@ $(document).on("pageshow", function() {
              */
             function updateTable() {
                 // Build the new table contents
-                var html;
+                var html = '';
                 for(var i = Math.max(0, getGuessesCount() - 5); i < getGuessesCount(); i++) {
                     html += "<tr>";
                     html += "<td>" + (i + 1) + "</td>\n";
@@ -243,10 +211,91 @@ $(document).on("pageshow", function() {
                 chart.series[0].setData(data, true);
             }
 
+            /**
+             * Update every preview.
+             */
+            function updateAll() {
+                updateTable();
+                updateGuessCounter();
+                updateGraph();
+            }
+
+            /**
+             * Refresh the current guesses.
+             *
+             * @param showLoadingIndicator True to show a loading indicator.
+             */
+            function refreshGuesses(showLoadingIndicator) {
+                // Show the indicator
+                if(showLoadingIndicator)
+                    showLoader("Schattingen laden...");
+
+                // Make an AJAX request to load the station results
+                currentRequest = $.ajax({
+                    type: "GET",
+                    url: "ajax/guesses.php",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    timeout: 10000,
+                    success:function(data) {
+                        // Show the error message if returned
+                        if(data.hasOwnProperty('error_msg')) {
+                            alert("A fatal error has been detected by Carbon CORE: Failed to parse guesses data.");
+                            return;
+                        }
+
+                        // The guesses data
+                        guesses = data;
+
+                        // Update everything
+                        updateAll();
+                    },
+                    error: function(msg) {
+                        // An error occurred, show a status message
+                        if(msg.statusText != 'timeout')
+                            alert("A fatal error has been detected by Carbon CORE: " + msg.statusText);
+                    },
+                    complete: function() {
+                        // Clear the current request variable
+                        currentRequest = null;
+
+                        // Hide the loading indicator
+                        if(showLoadingIndicator)
+                            hideLoader();
+                    }
+                });
+            }
+
+            // The guesses refresh timer
+            var guessesRefreshTimer = null;
+
+            /**
+             * Start or restart the refresh timer.
+             */
+            function startRefreshTimer() {
+                // Stop the current timer
+                stopRefreshTimer();
+
+                // Set up the timer
+                guessesRefreshTimer = setInterval(function() {
+                    refreshGuesses(true);
+                }, 1000 * 60);
+            }
+
+            /**
+             * Stop the refresh timer.
+             */
+            function stopRefreshTimer() {
+                // Clear the timer
+                if(guessesRefreshTimer != null)
+                    clearInterval(guessesRefreshTimer);
+
+                // Reset the variable
+                guessesRefreshTimer = null;
+            }
+
             // Update everything on start
-            updateTable();
-            updateGuessCounter();
-            updateGraph();
+            updateAll();
 
             // Bind to the channel to process updates
             channel.bind('client-newGuess', function(data) {
@@ -254,10 +303,15 @@ $(document).on("pageshow", function() {
                 guesses.push({firstName: data.firstName, lastName: data.lastName, weight: data.weight});
                 //alert('CLIENT: Name: ' + data.firstName + ' ' + data.lastName + '; Weight: ' + data.weight + ' KG');
 
-                updateTable();
-                updateGuessCounter();
-                updateGraph();
+                // Update everything
+                updateAll();
             });
+
+            // Refresh all the guesses
+            refreshGuesses(true);
+
+            // Start the refresh timer
+            startRefreshTimer();
         }
     }
 });
