@@ -22,7 +22,8 @@ if(isset($_GET['guess_step'])) {
     $guessStep = (int) $registerStepValue;
 }
 
-// TODO: make sure the user can still guess
+if(!GuessManager::hasClientGuessesLeft())
+    showErrorPage('Je hebt het maximum aantal schattingen op dit apparaat ingestuurd.');
 
 if($guessStep == 1):
     if(!GuessManager::hasClientGuesses() || isset($_GET['ignoreWarning'])):
