@@ -98,11 +98,11 @@ $(document).on("pageshow", function() {
             // Update the indicator
             if(state == 'initialized')
                 connectionIndicator.addClass('none');
-            else if(state == 'connecting')
+            else if(state == 'connecting' || state == 'unavailable')
                 connectionIndicator.addClass('unstable');
             else if(state == 'connected')
                 connectionIndicator.addClass('connected');
-            else if(state == 'unavailable' || state == 'failed' || state == 'disconnected')
+            else if(state == 'failed' || state == 'disconnected')
                 connectionIndicator.addClass('disconnected');
         }
 
@@ -113,6 +113,9 @@ $(document).on("pageshow", function() {
         pusher.connection.bind('unavailable', function() { updateConnectionState(); });
         pusher.connection.bind('failed', function() { updateConnectionState(); });
         pusher.connection.bind('disconnected', function() { updateConnectionState(); });
+
+        // Force update the connection state each second
+        setInterval(function() { updateConnectionState(); }, 1000);
 
         // Subscribe to the guess updates channel
         var channel = pusher.subscribe('private-guessUpdates');
