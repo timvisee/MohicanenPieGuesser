@@ -439,6 +439,11 @@ input.ui-btn.ui-btn-active {
 }
 
 #connection-indicator.unstable {
+    background-color: #c4b504 !important;
+    box-shadow: 0 0 6px #dac500 !important;
+}
+
+#connection-indicator.none {
     background-color: #a3a2a1;
     box-shadow: 0 0 6px #a7a6a5;
 }
