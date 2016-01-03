@@ -327,10 +327,10 @@ $(document).on("pageshow", function() {
             function refreshGuesses(showLoadingIndicator) {
                 // Show the indicator
                 if(showLoadingIndicator)
-                    showLoader("Schattingen laden...");
+                    showLoader("Schattingen verversen...");
 
                 // Make an AJAX request to load the station results
-                currentRequest = $.ajax({
+                var currentRequest = $.ajax({
                     type: "GET",
                     url: "ajax/guesses.php",
                     contentType: "application/json; charset=utf-8",
@@ -351,7 +351,7 @@ $(document).on("pageshow", function() {
                     },
                     error: function(msg) {
                         // An error occurred, show a status message
-                        if(msg.statusText != 'timeout')
+                        if(msg.statusText != 'timeout' && pageId != 'page-screen')
                             alert("A fatal error has been detected by Carbon CORE: " + msg.statusText);
                     },
                     complete: function() {
