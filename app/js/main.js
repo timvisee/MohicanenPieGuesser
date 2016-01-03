@@ -365,8 +365,9 @@ $(document).on("pageshow", function() {
              * Refresh the current guesses.
              *
              * @param showLoadingIndicator True to show a loading indicator.
+             * @param showErrors True to show errors, false otherwise.
              */
-            function refreshGuesses(showLoadingIndicator) {
+            function refreshGuesses(showLoadingIndicator, showErrors) {
                 // Show the indicator
                 if(showLoadingIndicator)
                     showLoader("Schattingen laden...");
@@ -419,7 +420,7 @@ $(document).on("pageshow", function() {
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
-                    refreshGuesses(false);
+                    refreshGuesses(false, false);
                 }, 1000 * 60);
             }
 
@@ -445,7 +446,7 @@ $(document).on("pageshow", function() {
             });
 
             // Refresh all the guesses
-            refreshGuesses(true);
+            refreshGuesses(true, true);
 
             // Start the refresh timer
             startRefreshTimer();
