@@ -16,7 +16,7 @@ $site_root = '';
 <html>
 <head>
 
-    <title>Mohicanen &middot; Taart raden</title>
+    <title>Hoe zwaar is de taart? &middot; Mohicanen NJO 2016</title>
 
     <!-- Meta -->
     <meta charset="UTF-8">
