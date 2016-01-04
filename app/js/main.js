@@ -339,7 +339,13 @@ $(document).on("pageshow", function() {
                                     enabled: true
                                 }
                             }
-                        }
+                        },
+                        lineWidth: 4,
+                        states: {
+                            hover: {
+                                lineWidth: 5
+                            }
+                        },
                     }
                 },
                 series: [{
