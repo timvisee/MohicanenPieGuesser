@@ -349,11 +349,13 @@ input.ui-btn.ui-btn-active {
   background-color: #00ad00;
   box-shadow: 0 0 6px #00ba00; }
 
-#connection-indicator.disconnected {
+#connection-indicator.disconnected,
+#connection-indicator.unavailable {
   background-color: #ba000c;
   box-shadow: 0 0 6px #ff2f31; }
 
-#connection-indicator.unstable {
+#connection-indicator.unstable,
+#connection-indicator.connecting {
   background-color: #c4b504 !important;
   box-shadow: 0 0 6px #dac500 !important; }
 

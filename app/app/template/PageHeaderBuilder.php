@@ -305,11 +305,6 @@ class PageHeaderBuilder {
         if($connectionIndicator) {
             // The indicator
             echo '<div id="connection-indicator" class="none"></div>';
-
-            // The popup
-            echo '<div data-role="popup" id="connection-indicator-popup">';
-            echo '<p>Verbonden!</p>';
-            echo '</div>';
         }
 
         // Show the menu button if set
