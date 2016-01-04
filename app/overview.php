@@ -9,19 +9,8 @@ require_once('top.php');
 
 ?>
     <div data-role="page" id="page-preview">
-        <?php
-        // Construct the builder
-        $builder = PageHeaderBuilder::create('Overzicht');
-
-        // Check whether to add a back button
-        if(isset($_GET['back']))
-            $builder->setBackButton('index.php');
-
-        // Build the header
-        $builder->build(true);
-        ?>
+        <?php PageHeaderBuilder::create('Overzicht')->setBackButton('index.php')->build(true); ?>
         <div data-role="main" class="ui-content">
-
             <p>Hier vindt je het overzicht van alle ingestuurde schattingen.</p>
             <br />
 
@@ -30,11 +19,9 @@ require_once('top.php');
                     Totaal aantal schattingen: <div id="guess-counter">?</div>
                 </div>
             </center>
-
             <br />
 
             <div id="guess-graph" style="height: 250px;"></div>
-
             <br />
 
             <p>Meest recente schattingen:</p>
@@ -50,7 +37,6 @@ require_once('top.php');
                 </thead>
                 <tbody></tbody>
             </table>
-
             <br />
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
