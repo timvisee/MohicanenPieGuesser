@@ -61,10 +61,6 @@ $site_root = '';
     <!-- Library: jQuery -->
     <script src="<?=$site_root; ?>lib/jquery/jquery-1.11.3.min.js"></script>
 
-    <!-- Library: bootstrap-tour -->
-    <link rel="stylesheet" href="<?=$site_root; ?>lib/bootstrap-tour/css/bootstrap-tour-standalone.min.css" />
-    <script src="<?=$site_root; ?>lib/bootstrap-tour/js/bootstrap-tour-standalone.min.js"></script>
-
     <!-- Script -->
     <script src="<?=$site_root; ?>js/jquery.mobile.settings.js"></script>
     <script src="<?=$site_root; ?>js/main.js"></script>
