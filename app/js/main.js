@@ -283,8 +283,10 @@ $(document).on("pageshow", function() {
 
         // Code for the preview page
         if(pageId == 'page-preview' || pageId == 'page-screen') {
-            // Create an array of guesses
+            // Create an array of guesses and client guesses
             var guesses = [];
+            var clientGuesses = [];
+            var clientGuessesPlotted = [];
 
             // Set the step on the xaxis used in the graph and the minimum and maximum values
             var graphSteps = 100;
@@ -311,20 +313,7 @@ $(document).on("pageshow", function() {
                         tickInterval: 2,
                         fontSize: '60px',
                         color: 'red'
-                    },
-                    plotLines: [{
-                        color: 'red',
-                        dashStyle: 'solid',
-                        value: 10,
-                        width: 2,
-                        label: {
-                            text: '&lt;guess.name&gt;', // Content of the label.
-                            align: 'right',
-                            rotation: 270,
-                            x: -7,
-                            y: +4
-                        }
-                    }]
+                    }
                 },
                 yAxis: {
                     title: {
@@ -433,6 +422,59 @@ $(document).on("pageshow", function() {
 
                 // Set the chart data
                 chart.series[0].setData(data, true);
+
+                // Loop through all the plotted client guesses, and remove the client guesses if they don't exist anymore
+                for(i = 0; i < clientGuessesPlotted.length; i++) {
+                    // Get the ID
+                    var plotId = clientGuessesPlotted[i];
+
+                    // Make sure this ID is still in the client guesses list
+                    var inList = false;
+                    for(var j = 0; j < clientGuesses.length; j++) {
+                        // Check whether the ID equals the current ID in the list
+                        if(clientGuesses[j].id == plotId) {
+                            // Set the flag
+                            inList = true;
+
+                            // Break the loop
+                            break;
+                        }
+                    }
+
+                    // Remove the plotted line if it doesn't exist anymore
+                    if(!inList)
+                        chart.xAxis[0].removePlotLine(plotId);
+                }
+
+                // Plot the client guesses
+                for(i = 0; i < clientGuesses.length; i++) {
+                    // Get some parameters
+                    var guessId = clientGuesses[i].id;
+
+                    // Only plot the new line if it isn't plotted yet
+                    if($.inArray(guessId, clientGuessesPlotted) == -1) {
+                        var fullName = clientGuesses[i].firstName + ' ' + clientGuesses[i].lastName;
+
+                        // Plot the guess line
+                        chart.xAxis[0].addPlotLine({
+                            color: 'red',
+                            dashStyle: 'solid',
+                            value: Math.round(clientGuesses[i].weight / graphSteps) - min,
+                            width: 2,
+                            label: {
+                                text: fullName,
+                                align: 'right',
+                                rotation: 270,
+                                x: -7,
+                                y: +4
+                            },
+                            id: guessId
+                        });
+
+                        // Add the plot ID to the array
+                        clientGuessesPlotted.push(guessId);
+                    }
+                }
             }
 
             /**
@@ -468,8 +510,9 @@ $(document).on("pageshow", function() {
                             return;
                         }
 
-                        // The guesses data
-                        guesses = data;
+                        // The guesses and client guesses data
+                        guesses = data.guesses;
+                        clientGuesses = data.clientGuesses;
 
                         // Update everything
                         updateAll();

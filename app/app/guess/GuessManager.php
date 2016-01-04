@@ -185,6 +185,17 @@ class GuessManager {
     }
 
     /**
+     * Get all guesses made by the current client.
+     *
+     * @return array Array of guesses.
+     *
+     * @throws Exception Throws if an error occurred.
+     */
+    public static function getClientGuesses() {
+        return GuessManager::getGuessesWithSessionId(session_id());
+    }
+
+    /**
      * Check whether this client has made any guesses.
      *
      * @return bool True if any guesses are made.
