@@ -257,15 +257,11 @@ elseif($guessStep == 5):
 
         <div data-role="main" class="ui-content">
             <p>
-                Je schatting is succesvol ingestuurd! We nemen contact met je op via het opgegeven E-mail adres als je de gelukkige winnaar bent.
+                Je schatting is succesvol ingestuurd!
             </p><br />
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-                <a href="overview.php" class="ui-btn ui-icon-home ui-btn-icon-left">Overzicht bekijken</a>
-            </fieldset>
-
-            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
-                <a href="index.php" data-ajax="false" class="ui-btn ui-icon-home ui-btn-icon-left" data-direction="reverse"><?=__('navigation', 'goToFrontPage'); ?></a>
+                <a href="guess.php?guess_step=6" class="ui-btn ui-icon-home ui-btn-icon-left">Overzicht bekijken</a>
             </fieldset>
         </div>
 
