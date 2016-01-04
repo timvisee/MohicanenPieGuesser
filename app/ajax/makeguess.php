@@ -24,9 +24,6 @@ if(!AccountUtils::isValidName($firstName) || !AccountUtils::isValidName($lastNam
 if(!AccountUtils::isValidMail($mail))
     returnError("Ongeldig E-mail adres.");
 
-if(GuessManager::isGuessWithMail($mail))
-    returnError("E-mail adres is al in gebruik.");
-
 // TODO: Make sure the guessed value is valid!
 if(!GuessManager::hasClientGuessesLeft())
     returnError("Maximum aantal schattingen overschreden.");
