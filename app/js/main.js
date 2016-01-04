@@ -268,17 +268,6 @@ $(document).on("pageshow", function() {
                 makeGuess();
                 return false;
             });
-
-            //channel.bind('pusher:subscription_succeeded', function() {
-            //    // Determine a random weight
-            //    var weight = 12.5;
-            //    var num = Math.random() * 12;
-            //    for(var i = 0; i < num; i++)
-            //        weight += (Math.random() * 2) - 1;
-            //
-            //    // Trigger a debug event
-            //    channel.trigger('client-newGuess', {weight: weight, firstName: 'Timmeh', lastName: "Visse"});
-            //});
         }
 
         // Code for the preview page
