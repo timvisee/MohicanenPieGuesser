@@ -24,7 +24,7 @@ if(isset($_GET['guess_step'])) {
 
 // Make sure the user isn't guessing more than it's allowed to
 if(!GuessManager::hasClientGuessesLeft() && $guessStep != 6)
-    showErrorPage('Je hebt het maximum aantal schattingen op dit apparaat ingestuurd.');
+    showErrorPage('Je kunt geen schattingen meer insturen via dit apparaat. Je hebt het maximum van <b>' . GuessManager::getMaximumGuessesPerClient() . '</b> schattingen ingestuurd.', 'Rustig aan!');
 
 if($guessStep == 1):
     if(!GuessManager::hasClientGuesses() || isset($_GET['ignoreWarning'])):
