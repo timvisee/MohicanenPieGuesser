@@ -11,7 +11,7 @@ require_once('top.php');
     <div data-role="page" id="page-preview">
         <?php PageHeaderBuilder::create('Overzicht')->setBackButton('index.php')->build(true); ?>
         <div data-role="main" class="ui-content">
-            <p>Hier vindt je het overzicht van alle ingestuurde schattingen.</p>
+            <p>Hier vindt je een live overzicht van alle ingestuurde schattingen.</p>
             <br />
 
             <center>
