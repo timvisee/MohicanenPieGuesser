@@ -55,22 +55,19 @@ function hideLoader() {
     $.mobile.loading("hide");
 }
 
-
-
-
-
-
+// Page dependend scripts
 $(document).on("pageshow", function() {
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-        if (window.console && window.console.log) {
-            window.console.log(message);
-        }
-    };
+    //// Enable pusher logging - don't include this in production
+    //Pusher.log = function(message) {
+    //    if (window.console && window.console.log) {
+    //        window.console.log(message);
+    //    }
+    //};
 
     // Get the active page ID
     var pageId = getActivePageId();
 
+    // Only run the following scripts on the specified pages
     if(pageId == 'page-guess-send' || pageId == 'page-preview' || pageId == 'page-screen') {
         // Create a new pusher instance
         var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
