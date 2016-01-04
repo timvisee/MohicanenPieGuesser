@@ -32,4 +32,4 @@ if(!GuessManager::hasClientGuessesLeft())
 $guess = GuessManager::createGuess($firstName, $lastName, $mail, $weight);
 
 // Return the result with JSON
-returnJson(Array('result' => 'success'));
+returnJson(array('result' => 'success'));

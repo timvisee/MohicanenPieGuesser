@@ -294,10 +294,6 @@ class GuessManager {
         if(!AccountUtils::isValidMail($mail))
             throw new Exception('The mail is invalid.');
 
-        // Make sure the mail is unique
-        if(GuessManager::isGuessWithMail($mail))
-            throw new Exception('The mail already exists.');
-
         // TODO: Validate the weight!
 
         // Get the session ID
