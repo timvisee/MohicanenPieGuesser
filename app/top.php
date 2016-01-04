@@ -79,6 +79,10 @@ $site_root = '';
     <!-- Library: Highcharts -->
     <script src="//code.highcharts.com/highcharts.js"></script>
 
+    <!-- Library: Tooltipster -->
+    <link rel="stylesheet" type="text/css" href="<?=$site_root; ?>lib/tooltipster/css/tooltipster.css" />
+    <script type="text/javascript" src="<?=$site_root; ?>lib/tooltipster/js/jquery.tooltipster.min.js"></script>
+
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="<?=$site_root; ?>style/style.css">
 
