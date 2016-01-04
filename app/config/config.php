@@ -35,7 +35,9 @@ return Array(
         'debug' => true
     ),
 
-    'mail' => Array(
-        'sender' => 'noreply@local.timvisee.com'
+    'pusher' => Array(
+        'auth_key' => '1ae3f01040df0206bf68',
+        'secret' => 'e885f550fba2b1e0d34f',
+        'app_id' => '164045'
     )
 );
