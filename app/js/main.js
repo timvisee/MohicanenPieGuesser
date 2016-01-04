@@ -72,6 +72,8 @@ $(document).on("pageshow", function() {
         // Create a new pusher instance
         var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
 
+        var popupHideTimer = null;
+
         /**
          * Update the connection state.
          */
@@ -79,28 +81,68 @@ $(document).on("pageshow", function() {
             // Get the state
             var state = pusher.connection.state;
 
-            // Get the connection state object
+            // Get the connection state object and the popup
             var connectionIndicator = $('#connection-indicator');
+            var connectionIndicatorPopup = $("#connection-indicator-popup");
 
             // Make sure a connection indicator is available
             if(connectionIndicator.length <= 0)
                 return;
 
-            // Remove all states
-            connectionIndicator.removeClass('connected');
-            connectionIndicator.removeClass('disconnected');
-            connectionIndicator.removeClass('unstable');
-            connectionIndicator.removeClass('none');
+            // Get the current state
+            var currentState = 'none';
+            if(connectionIndicator.hasClass('connected'))
+                currentState = 'connected';
+            else if(connectionIndicator.hasClass('disconnected'))
+                currentState = 'disconnected';
+            else if(connectionIndicator.hasClass('unstable'))
+                currentState = 'unstable';
 
-            // Update the indicator
-            if(state == 'initialized' || state == 'unavailable')
-                connectionIndicator.addClass('none');
-            else if(state == 'connecting')
-                connectionIndicator.addClass('unstable');
+            // Determine the new state
+            var newState = 'none';
+            if(state == 'connecting')
+                newState = 'unstable';
             else if(state == 'connected')
-                connectionIndicator.addClass('connected');
+                newState = 'connected';
             else if(state == 'failed' || state == 'disconnected')
-                connectionIndicator.addClass('disconnected');
+                newState = 'disconnected';
+
+            // Change the indicator and show a popup if the state has changed
+            if(currentState != newState) {
+                // Remove all states
+                connectionIndicator.removeClass('connected');
+                connectionIndicator.removeClass('disconnected');
+                connectionIndicator.removeClass('unstable');
+                connectionIndicator.removeClass('none');
+
+                // Apply the new state to the DOM
+                connectionIndicator.addClass(newState);
+
+                // Set the popup message
+                if(newState == 'unstable')
+                    connectionIndicatorPopup.find('div').html('Verbinding instabiel');
+                else if(newState == 'connected')
+                    connectionIndicatorPopup.find('div').html('Verbonden');
+                else if(newState == 'disconnected')
+                    connectionIndicatorPopup.find('div').html('Geen verbinding');
+                else if(newState == 'none')
+                    connectionIndicatorPopup.find('div').html('Verbinding maken...');
+
+                connectionIndicatorPopup.popup("open", {
+                    transition: 'slide',
+                    x: (connectionIndicator.offset().left - connectionIndicatorPopup.width()),
+                    y: (connectionIndicator.offset().top + 60)
+                });
+
+                // Clear the timer if it was already running
+                if(popupHideTimer != null)
+                    clearTimeout(popupHideTimer);
+
+                // Set a popup timeout
+                popupHideTimer = setTimeout(function() {
+                    connectionIndicatorPopup.popup("close");
+                }, 1500);
+            }
         }
 
         // Register all events for connections
