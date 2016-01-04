@@ -161,7 +161,7 @@ $(document).on("pageshow", function() {
                         // Continue to the overview page
                         setTimeout(function() {
                             // Continue
-                            jQuery.mobile.navigate('overview.php');
+                            jQuery.mobile.navigate('guess.php?guess_step=6');
 
                             // Hide the loading indicator
                             hideLoader();

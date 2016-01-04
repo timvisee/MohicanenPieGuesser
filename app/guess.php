@@ -23,7 +23,7 @@ if(isset($_GET['guess_step'])) {
 }
 
 // Make sure the user isn't guessing more than it's allowed to
-if(!GuessManager::hasClientGuessesLeft())
+if(!GuessManager::hasClientGuessesLeft() && $guessStep != 6)
     showErrorPage('Je hebt het maximum aantal schattingen op dit apparaat ingestuurd.');
 
 if($guessStep == 1):
@@ -252,7 +252,7 @@ elseif($guessStep == 5):
     GuessManager::createGuess($firstName, $lastName, $mail, $weight);
 
     ?>
-    <div data-role="page" id="page-guess-done" data-unload="false">
+    <div data-role="page" id="page-guess-success" data-unload="false">
         <?php PageHeaderBuilder::create("Schatting ingestuurd")->setBackButton('index.php')->build(); ?>
 
         <div data-role="main" class="ui-content">
@@ -266,6 +266,38 @@ elseif($guessStep == 5):
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                 <a href="index.php" data-ajax="false" class="ui-btn ui-icon-home ui-btn-icon-left" data-direction="reverse"><?=__('navigation', 'goToFrontPage'); ?></a>
+            </fieldset>
+        </div>
+
+        <?php
+        // Build the footer and sidebar
+        PageFooterBuilder::create()->build();
+        ?>
+    </div>
+    <?php
+
+elseif($guessStep == 6):
+
+    ?>
+    <div data-role="page" id="page-guess-success" data-unload="false">
+        <?php PageHeaderBuilder::create("Schatting ingestuurd")->build(); ?>
+
+        <div data-role="main" class="ui-content">
+            <p>
+                Bedankt voor het insturen van je schatting! We nemen contact met je op via het opgegeven E-mail adres als je de gelukkige winnaar bent.<br />
+                <br />
+                Vindt je het interessant om te zien wat andere bezoekers gestemd hebben? Bekijk dan het <i>overzicht</i> met de onderstaande knop.<br />
+                <br />
+                Ook kun je jouw ingestuurde schattingen bekijken, of een nieuwe schatting voor iemand anders insturen.
+            </p><br />
+
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="overview.php" class="ui-btn ui-icon-home ui-btn-icon-left">Overzicht bekijken</a>
+            </fieldset>
+
+            <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
+                <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
+                <a href="guess.php" class="ui-btn ui-icon-plus ui-btn-icon-left">Schatting voor een ander insturen</a>
             </fieldset>
         </div>
 
