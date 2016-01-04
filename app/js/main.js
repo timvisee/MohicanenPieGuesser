@@ -72,8 +72,8 @@ $(document).on("pageshow", function() {
         // Create a new pusher instance
         var pusher = new Pusher('1ae3f01040df0206bf68', { authEndpoint: 'pusher/auth/auth.php' });
 
-        //var popupHideTimer = null;
-        var tooltip = null;
+        // Get the connection state object and the popup
+        var connectionIndicator = $('#connection-indicator');
 
         /**
          * Update the connection state.
@@ -81,9 +81,6 @@ $(document).on("pageshow", function() {
         function updateConnectionState() {
             // Get the state
             var state = pusher.connection.state;
-
-            // Get the connection state object and the popup
-            var connectionIndicator = $('#connection-indicator');
 
             // Make sure a connection indicator is available
             if(connectionIndicator.length <= 0)
@@ -145,26 +142,39 @@ $(document).on("pageshow", function() {
                 else if(newState == 'none')
                     tooltipMessage = 'Geen verbinding';
 
-                // Create a tooltip for the indicator if it doesn't exist yet
-                if(tooltip == null) {
-                    // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
-                    var tooltips = connectionIndicator.tooltipster({
-                        multiple: true,
-                        delay: 0,
-                        timer: 2500,
-                        position: 'right',
-                        offsetX: 4,
-                        updateAnimation: true,
-                        animation: 'fade'
-                    });
-
-                    // this is also a way to call API methods on the first tooltip
-                    tooltip = tooltips[0];
-                }
-
-                // Update and show the tooltip
-                tooltip.content(tooltipMessage).show();
+                // Show the tooltip
+                showConnectionIndicatorTooltip(tooltipMessage);
             }
+        }
+
+        // Connection indicator tooltip instance
+        var connectionIndicatorTooltip = null;
+
+        /**
+         * Show a tooltip message next to the connection indicator.
+         *
+         * @param message The tooltip message to show.
+         */
+        function showConnectionIndicatorTooltip(message) {
+            // Create a tooltip for the indicator if it doesn't exist yet
+            if(connectionIndicatorTooltip == null) {
+                // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
+                var tooltips = connectionIndicator.tooltipster({
+                    multiple: true,
+                    delay: 0,
+                    timer: 2500,
+                    position: 'right',
+                    offsetX: 4,
+                    updateAnimation: true,
+                    animation: 'fade'
+                });
+
+                // this is also a way to call API methods on the first tooltip
+                connectionIndicatorTooltip = tooltips[0];
+            }
+
+            // Update and show the tooltip
+            connectionIndicatorTooltip.content(message).show();
         }
 
         // Register all events for connections
@@ -473,8 +483,10 @@ $(document).on("pageshow", function() {
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
+                    showConnectionIndicatorTooltip('Verversen...');
                     refreshGuesses(false, false);
-                }, 1000 * 60);
+                    showConnectionIndicatorTooltip('Schattingen ververst');
+                }, 1000 * 60 * 2);
             }
 
             /**
