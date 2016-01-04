@@ -205,6 +205,17 @@ class GuessManager {
     }
 
     /**
+     * Return the maximum number of guesses a client may submit.
+     *
+     * @return int Maximum number of guesses.
+     *
+     * @throws Exception Throws if an error occurred.
+     */
+    public static function getMaximumGuessesPerClient() {
+        return (int) Registry::getValue('client.maxEntries')->getValue();
+    }
+
+    /**
      * Get the number of guesses left for this client.
      *
      * @return int Number of guesses left.
@@ -212,7 +223,7 @@ class GuessManager {
      * @throws Exception Throws if an error occurred.
      */
     public static function getClientGuessesLeft() {
-        return max(((int) Registry::getValue('client.maxEntries')->getValue()) - self::getClientGuessCount(), 0);
+        return max(GuessManager::getMaximumGuessesPerClient() - self::getClientGuessCount(), 0);
     }
 
     /**
