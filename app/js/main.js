@@ -175,6 +175,14 @@ $(document).on("pageshow", function() {
 
             // Update and show the tooltip
             connectionIndicatorTooltip.content(message).show();
+
+            // Reposition the tooltip for half a second
+            var positionFixInterval = setInterval(function() {
+                connectionIndicatorTooltip.reposition();
+            }, 5);
+            setTimeout(function() {
+                clearInterval(positionFixInterval);
+            }, 500);
         }
 
         // Register all events for connections
@@ -428,9 +436,8 @@ $(document).on("pageshow", function() {
              * Refresh the current guesses.
              *
              * @param showLoadingIndicator True to show a loading indicator.
-             * @param showErrors True to show errors, false otherwise.
              */
-            function refreshGuesses(showLoadingIndicator, showErrors) {
+            function refreshGuesses(showLoadingIndicator) {
                 // Show the indicator
                 if(showLoadingIndicator)
                     showLoader("Schattingen laden...");
@@ -455,10 +462,9 @@ $(document).on("pageshow", function() {
                         // Update everything
                         updateAll();
                     },
-                    error: function(msg) {
+                    error: function() {
                         // An error occurred, show a status message
-                        if(msg.statusText != 'timeout' && pageId != 'page-screen')
-                            alert("A fatal error has been detected by Carbon CORE: " + msg.statusText);
+                        showConnectionIndicatorTooltip('Fout bij verversen');
                     },
                     complete: function() {
                         // Clear the current request variable
@@ -484,7 +490,7 @@ $(document).on("pageshow", function() {
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
                     showConnectionIndicatorTooltip('Verversen...');
-                    refreshGuesses(false, false);
+                    refreshGuesses(false);
                     showConnectionIndicatorTooltip('Schattingen ververst');
                 }, 1000 * 60 * 2);
             }
@@ -511,7 +517,7 @@ $(document).on("pageshow", function() {
             });
 
             // Refresh all the guesses
-            refreshGuesses(true, true);
+            refreshGuesses(true);
 
             // Start the refresh timer
             startRefreshTimer();
