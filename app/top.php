@@ -91,12 +91,17 @@ $site_root = '';
  * Show a regular error page.
  *
  * @param string|null $errorMsg [optional] A custom error message, or null to show the default.
+ * @param string|null $errorTitle [optional] A custom error page title, or null to show the default.
  */
-function showErrorPage($errorMsg = null) {
+function showErrorPage($errorMsg = null, $errorTitle = null) {
+    // Parse the title
+    if($errorTitle == null || strlen(trim($errorTitle)) == 0)
+        $errorTitle = __('error', 'oops');
+
     // Show an error page
     ?>
     <div data-role="page" id="page-main">
-        <?php PageHeaderBuilder::create(__('error', 'oops'))->setBackButton('index.php')->build();
+        <?php PageHeaderBuilder::create($errorTitle)->setBackButton('index.php')->build();
 
         if($errorMsg === null): ?>
             <div data-role="main" class="ui-content">
