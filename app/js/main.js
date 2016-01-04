@@ -311,7 +311,20 @@ $(document).on("pageshow", function() {
                         tickInterval: 2,
                         fontSize: '60px',
                         color: 'red'
-                    }
+                    },
+                    plotLines: [{
+                        color: 'red',
+                        dashStyle: 'solid',
+                        value: 10,
+                        width: 2,
+                        label: {
+                            text: '&lt;guess.name&gt;', // Content of the label.
+                            align: 'right',
+                            rotation: 270,
+                            x: -7,
+                            y: +4
+                        }
+                    }]
                 },
                 yAxis: {
                     title: {
