@@ -286,14 +286,16 @@ elseif($guessStep == 6):
             <p>
                 Bedankt voor het insturen van je schatting! We nemen contact met je op via het opgegeven E-mail adres als je de gelukkige winnaar bent.<br />
                 <br />
-                Vindt je het interessant om te zien wat andere bezoekers gestemd hebben? Bekijk dan het <i>overzicht</i> met de onderstaande knop.<br />
-                <br />
-                Ook kun je jouw ingestuurde schattingen bekijken, of een nieuwe schatting voor iemand anders insturen.
+                Vindt je het interessant om live te zien wat andere bezoekers gestemd hebben? Bekijk dan het <i>overzicht</i>.
             </p><br />
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                 <a href="overview.php" class="ui-btn ui-icon-home ui-btn-icon-left">Overzicht bekijken</a>
             </fieldset>
+            <br />
+            <br />
+
+            <p>Ook kun je jouw ingestuurde schattingen terugzien, of een nieuwe schatting voor iemand anders insturen.</p><br />
 
             <fieldset data-role="controlgroup" data-type="vertical" class="ui-shadow ui-corner-all">
                 <a href="myguesses.php" class="ui-btn ui-icon-bullets ui-btn-icon-left">Mijn schattingen</a>
