@@ -57,13 +57,6 @@ function hideLoader() {
 
 // Page dependend scripts
 $(document).on("pageshow", function() {
-    //// Enable pusher logging - don't include this in production
-    //Pusher.log = function(message) {
-    //    if (window.console && window.console.log) {
-    //        window.console.log(message);
-    //    }
-    //};
-
     // Get the active page ID
     var pageId = getActivePageId();
 
