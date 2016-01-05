@@ -1,6 +1,7 @@
 <?php
 
-use app\guess\GuessManager;use app\template\PageFooterBuilder;
+use app\guess\GuessManager;
+use app\template\PageFooterBuilder;
 use app\template\PageHeaderBuilder;
 
 // Include the page top

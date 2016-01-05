@@ -53,9 +53,6 @@ Config::load();
 use carbon\core\ErrorHandler;
 ErrorHandler::init(true, true, Config::getValue('app', 'debug'));
 
-// Start a PHP session
-session_start();
-
 // Connect to the database
 use app\database\Database;
 Database::connect();
@@ -92,3 +89,70 @@ function __($section, $key, $default = null) {
 // The app initialized successfully, define the APP_INIT_DONE constant to store the initialization state
 /** Defines whether the app is initialized successfully. */
 define('APP_INIT_DONE', true);
+
+//
+//
+//
+
+/**
+ * Generate a random key.
+ *
+ * @param $length [optional] Key length.
+ *
+ * @return string Random key.
+ */
+function generateRandomKey($length = 64) {
+    // Get the characters a session key can consist of
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=[]{}\\|/?<>,.`~';
+
+    // Generate a random session key
+    $randomKey = '';
+    for($i = 0; $i < $length; $i++)
+        $randomKey .= $chars[rand(0, strlen($chars) - 1)];
+
+    // Return the random key
+    return $randomKey;
+}
+
+// Get the session cookie name
+$sessionCookieName = Registry::getValue('client.session.cookie.name')->getValue();
+
+// Make sure the session cookie is set
+if(!CookieManager::hasCookie($sessionCookieName)) {
+    // Get the session timeout
+    $sessionTimeout = Registry::getValue('client.session.timeout')->getValue();
+
+    // Generate a session key
+    $sessionKey = generateRandomKey();
+
+    // Set the session
+    CookieManager::setCookie($sessionCookieName, $sessionKey, $sessionTimeout);
+
+    // Set the session key global
+    $GLOBALS['session_key'] = $sessionKey;
+}
+
+/**
+ * Get the key of the current client session.
+ *
+ * @return string Session key
+ *
+ * @throws Exception Throws if an error occurred.
+ */
+function getSessionKey() {
+    // Return the key from the globals if set
+    if(isset($GLOBALS['session_key']))
+        return $GLOBALS['session_key'];
+
+    // Get the session cookie name
+    $sessionCookieName = Registry::getValue('client.session.cookie.name')->getValue();
+
+    // Get the session key
+    $sessionKey = CookieManager::getCookie($sessionCookieName);
+
+    // Set the session key global
+    $GLOBALS['session_key'] = $sessionKey;
+
+    // Return the session key
+    return $sessionKey;
+}

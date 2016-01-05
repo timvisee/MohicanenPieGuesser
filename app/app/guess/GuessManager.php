@@ -192,7 +192,7 @@ class GuessManager {
      * @throws Exception Throws if an error occurred.
      */
     public static function getClientGuesses() {
-        return GuessManager::getGuessesWithSessionId(session_id());
+        return GuessManager::getGuessesWithSessionId(getSessionKey());
     }
 
     /**
@@ -212,7 +212,7 @@ class GuessManager {
      * @throws Exception Throws if an error occurred.
      */
     public static function getClientGuessCount() {
-        return self::getGuessesWithSessionIdCount(session_id());
+        return self::getGuessesWithSessionIdCount(getSessionKey());
     }
 
     /**
@@ -297,7 +297,7 @@ class GuessManager {
         // TODO: Validate the weight!
 
         // Get the session ID
-        $sessionId = session_id();
+        $sessionId = getSessionKey();
 
         // Determine the creation date time
         $dateTime = DateTime::now();

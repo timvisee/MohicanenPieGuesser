@@ -7,7 +7,7 @@ require_once('../app/init.php');
 
 // Get the session ID
 if($sessionId == null)
-    $sessionId = session_id();
+    $sessionId = getSessionKey();
 
 // Make sure the session ID is valid
 if(StringUtils::equals($sessionId, '', true, true))
