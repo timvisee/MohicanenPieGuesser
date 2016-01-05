@@ -31,7 +31,7 @@ require_once('top.php');
                     <tbody>
                         <?php
                         // Get all personal guesses
-                        $guesses = GuessManager::getGuessesWithSessionId(session_id());
+                        $guesses = GuessManager::getClientGuesses();
 
                         foreach($guesses as $guess) {
                             // Make sure the instance type is valid
