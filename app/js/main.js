@@ -60,6 +60,9 @@ $(document).on("pageshow", function() {
     // Get the active page ID
     var pageId = getActivePageId();
 
+    // Define whether a connection is available or not
+    var connectionActive = false;
+
     // Only run the following scripts on the specified pages
     if(pageId == 'page-guess-send' || pageId == 'page-preview' || pageId == 'page-screen') {
         // Create a new pusher instance
@@ -79,13 +82,19 @@ $(document).on("pageshow", function() {
             if(connectionIndicator.length <= 0)
                 return;
 
+            // Define the new connection active state flag
+            var newConnectionActive = false;
+
             // Get the current state
             var currentState = '';
             if(connectionIndicator.hasClass('connecting'))
                 currentState = 'connecting';
-            else if(connectionIndicator.hasClass('connected'))
+            else if(connectionIndicator.hasClass('connected')) {
                 currentState = 'connected';
-            else if(connectionIndicator.hasClass('unstable'))
+
+                // Set the connection active state flag
+                newConnectionActive = true;
+            } else if(connectionIndicator.hasClass('unstable'))
                 currentState = 'unstable';
             else if(connectionIndicator.hasClass('disconnected'))
                 currentState = 'disconnected';
@@ -142,6 +151,41 @@ $(document).on("pageshow", function() {
                 // Show the tooltip
                 showConnectionIndicatorTooltip(tooltipMessage, !keepShowingState);
             }
+
+            // Determine whether the connection active state flag has changed
+            if(newConnectionActive != connectionActive) {
+                // Update the connection active flag state
+                connectionActive = newConnectionActive;
+
+                // Check whether the connection was lost or whether it was connected again
+                if(!connectionActive) {
+                    // Stop the guess refresh timer
+                    stopRefreshTimer();
+
+                    // Set a tooltip above the chart
+                    setTimeout(function() {
+                        // Make sure there's still no connection available
+                        if(connectionActive)
+                            return true;
+
+                        // Show a warning
+                        showGuessChartTooltip("Schattingen verouderd", false);
+                    }, 5000);
+
+                } else {
+
+                    // Do a late refresh after half a second if we're still connected
+                    setTimeout(function() {
+                        refreshGuessesLate();
+                    }, 500);
+
+                    // Restart the refresh timer
+                    startRefreshTimer();
+                }
+            }
+
+            // Update the connection active flag state
+            connectionActive = newConnectionActive;
         }
 
         // Connection indicator tooltip instance
@@ -471,9 +515,9 @@ $(document).on("pageshow", function() {
             }
 
             /**
-             * Update the graph with the newest data
+             * Update the chart with the newest data
              */
-            function updateGraph() {
+            function updateChart() {
                 // Define the for loop index
                 var i;
 
@@ -550,7 +594,7 @@ $(document).on("pageshow", function() {
             function updateAll() {
                 updateTable();
                 updateGuessCounter();
-                updateGraph();
+                updateChart();
             }
 
             /**
@@ -586,7 +630,7 @@ $(document).on("pageshow", function() {
                     },
                     error: function() {
                         // An error occurred, show a status message
-                        showGuessChartTooltip('Fout bij verversen', true);
+                        showGuessChartTooltip('Fout bij verversen', false);
                     },
                     complete: function() {
                         // Clear the current request variable
@@ -611,10 +655,17 @@ $(document).on("pageshow", function() {
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
-                    showGuessChartTooltip('Verversen...', true);
-                    refreshGuesses(false);
-                    showGuessChartTooltip('Schattingen ververst', false);
+                    refreshGuessesLate();
                 }, 1000 * 60 * 2);
+            }
+
+            /**
+             * Refresh the guesses after initialization.
+             */
+            function refreshGuessesLate() {
+                showGuessChartTooltip('Verversen...', false);
+                refreshGuesses(false);
+                showGuessChartTooltip('Schattingen ververst', true);
             }
 
             /**
