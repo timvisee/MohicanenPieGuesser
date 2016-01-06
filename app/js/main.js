@@ -63,6 +63,9 @@ $(document).on("pageshow", function() {
     // Define whether a connection is available or not
     var connectionActive = false;
 
+    // Set the start time of the script
+    var startTime = Date.now();
+
     // Only run the following scripts on the specified pages
     if(pageId == 'page-guess-send' || pageId == 'page-preview' || pageId == 'page-screen') {
         // Create a new pusher instance
@@ -663,8 +666,17 @@ $(document).on("pageshow", function() {
              * Refresh the guesses after initialization.
              */
             function refreshGuessesLate() {
+                // Make sure the script is running for at least two seconds already
+                if(startTime + 2000 > Date.now())
+                    return true;
+
+                // Show a status message
                 showGuessChartTooltip('Verversen...', false);
+
+                // Refresh the guesses data
                 refreshGuesses(false);
+
+                // Show a status message
                 showGuessChartTooltip('Schattingen ververst', true);
             }
 
