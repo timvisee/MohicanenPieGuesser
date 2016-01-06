@@ -21,7 +21,7 @@ require_once('top.php');
             </center>
             <br />
 
-            <div id="guess-graph" style="height: 250px;"></div>
+            <div id="guess-chart" style="height: 250px;"></div>
             <br />
 
             <p>Meest recente schattingen:</p>

@@ -201,7 +201,7 @@ $(document).on("pageshow", function() {
             // Create a tooltip for the indicator if it doesn't exist yet
             if(guessChartTooltip == null) {
                 // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
-                var tooltips = $('#guess-graph').tooltipster({
+                var tooltips = $('#guess-chart').tooltipster({
                     multiple: true,
                     delay: 9999999,
                     timer: 2500,
@@ -353,7 +353,7 @@ $(document).on("pageshow", function() {
             var chartOptions = {
                 chart: {
                     backgroundColor: '#F9F9F9',
-                    renderTo: 'guess-graph',
+                    renderTo: 'guess-chart',
                     type: 'areaspline'
                 },
                 title: {

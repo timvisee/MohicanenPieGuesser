@@ -35,7 +35,7 @@ require_once('top.php');
 
             <fieldset class="ui-grid-a">
                 <div class="ui-block-a" style="width: 60%; padding-right: 20px; padding-top: 10px;">
-                    <div id="guess-graph" style="height: 100%;"></div>
+                    <div id="guess-chart" style="height: 100%;"></div>
                 </div>
                 <div class="ui-block-b" style="width: 40%; padding-left: 20px;">
                     <table data-role="table" id="guess-table" data-mode="reflow" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" >
