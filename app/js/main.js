@@ -94,13 +94,15 @@ $(document).on("pageshow", function() {
             else if(connectionIndicator.hasClass('none'))
                 currentState = 'none';
 
-            // Determine the new state
+            // Determine the new state and whether to keep showing the state
             var newState = '';
+            var keepShowingState = true;
             if(state == 'connecting')
                 newState = 'connecting';
-            else if(state == 'connected')
+            else if(state == 'connected') {
                 newState = 'connected';
-            else if(state == 'disconnected')
+                keepShowingState = false;
+            } else if(state == 'disconnected')
                 newState = 'disconnected';
             else if(state == 'initialized')
                 newState = 'none';
@@ -136,7 +138,7 @@ $(document).on("pageshow", function() {
                     tooltipMessage = 'Geen verbinding';
 
                 // Show the tooltip
-                showConnectionIndicatorTooltip(tooltipMessage);
+                showConnectionIndicatorTooltip(tooltipMessage, keepShowingState);
             }
         }
 
@@ -147,8 +149,9 @@ $(document).on("pageshow", function() {
          * Show a tooltip message next to the connection indicator.
          *
          * @param message The tooltip message to show.
+         * @param autoHide [optional] True to automatically hide the tooltip again. Defaults to true.
          */
-        function showConnectionIndicatorTooltip(message) {
+        function showConnectionIndicatorTooltip(message, autoHide) {
             // Create a tooltip for the indicator if it doesn't exist yet
             if(connectionIndicatorTooltip == null) {
                 // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
@@ -166,12 +169,65 @@ $(document).on("pageshow", function() {
                 connectionIndicatorTooltip = tooltips[0];
             }
 
+            // Determine whether to automatically hide the tooltip
+            var autoHideBool = true;
+            if(typeof autoHide === 'undefined')
+                autoHideBool = false;
+            else
+                autoHideBool = !!autoHide;
+
             // Update and show the tooltip
-            connectionIndicatorTooltip.content(message).show();
+            connectionIndicatorTooltip.content(message).option('autoClose', autoHideBool).show();
 
             // Reposition the tooltip for half a second
             var positionFixInterval = setInterval(function() {
                 connectionIndicatorTooltip.reposition();
+            }, 5);
+            setTimeout(function() {
+                clearInterval(positionFixInterval);
+            }, 500);
+        }
+
+        // Guess chart tooltip instance
+        var guessChartTooltip = null;
+
+        /**
+         * Show a tooltip message next to the guess chart.
+         *
+         * @param message The tooltip message to show.
+         * @param autoHide [optional] True to automatically hide the tooltip again. Defaults to true.
+         */
+        function showGuessChartTooltip(message, autoHide) {
+            // Create a tooltip for the indicator if it doesn't exist yet
+            if(guessChartTooltip == null) {
+                // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
+                var tooltips = $('#guess-graph').tooltipster({
+                    multiple: true,
+                    delay: 9999999,
+                    timer: 2500,
+                    position: 'top',
+                    offsetX: 4,
+                    updateAnimation: true,
+                    animation: 'fade'
+                });
+
+                // this is also a way to call API methods on the first tooltip
+                guessChartTooltip = tooltips[0];
+            }
+
+            // Determine whether to automatically hide the tooltip
+            var autoHideBool = true;
+            if(typeof autoHide === 'undefined')
+                autoHideBool = false;
+            else
+                autoHideBool = !!autoHide;
+
+            // Update and show the tooltip
+            guessChartTooltip.content(message).option('autoClose', autoHideBool).show();
+
+            // Reposition the tooltip for half a second
+            var positionFixInterval = setInterval(function() {
+                guessChartTooltip.reposition();
             }, 5);
             setTimeout(function() {
                 clearInterval(positionFixInterval);
@@ -519,7 +575,7 @@ $(document).on("pageshow", function() {
                     },
                     error: function() {
                         // An error occurred, show a status message
-                        showConnectionIndicatorTooltip('Fout bij verversen');
+                        showGuessChartTooltip('Fout bij verversen', true);
                     },
                     complete: function() {
                         // Clear the current request variable
@@ -544,9 +600,9 @@ $(document).on("pageshow", function() {
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
-                    showConnectionIndicatorTooltip('Verversen...');
+                    showGuessChartTooltip('Verversen...', true);
                     refreshGuesses(false);
-                    showConnectionIndicatorTooltip('Schattingen ververst');
+                    showGuessChartTooltip('Schattingen ververst', false);
                 }, 1000 * 60 * 2);
             }
 
