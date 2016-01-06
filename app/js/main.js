@@ -179,7 +179,11 @@ $(document).on("pageshow", function() {
                 autoHideBool = !!autoHide;
 
             // Update and show the tooltip
-            connectionIndicatorTooltip.content(message).option('autoClose', autoHideBool).show();
+            connectionIndicatorTooltip
+                .content(message)
+                .option('autoClose', autoHideBool)
+                .option('timer', autoHideBool ? 2500 : 0)
+                .show();
 
             // Reposition the tooltip for half a second
             var positionFixInterval = setInterval(function() {
@@ -187,7 +191,7 @@ $(document).on("pageshow", function() {
             }, 5);
             setTimeout(function() {
                 clearInterval(positionFixInterval);
-            }, 500);
+            }, 1000);
         }
 
         // Guess chart tooltip instance
@@ -205,12 +209,13 @@ $(document).on("pageshow", function() {
                 // You may use the 'multiple' option on the first tooltip as well, it will return an array of objects too
                 var tooltips = $('#guess-chart').tooltipster({
                     multiple: true,
-                    delay: 9999999,
+                    delay: 0,
                     timer: 2500,
                     position: 'top',
                     offsetX: 4,
                     updateAnimation: true,
-                    animation: 'fade'
+                    animation: 'fade',
+                    trigger: 'custom'
                 });
 
                 // this is also a way to call API methods on the first tooltip
@@ -225,7 +230,11 @@ $(document).on("pageshow", function() {
                 autoHideBool = !!autoHide;
 
             // Update and show the tooltip
-            guessChartTooltip.content(message).option('autoClose', autoHideBool).show();
+            guessChartTooltip
+                .content(message)
+                .option('autoClose', autoHideBool)
+                .option('timer', autoHideBool ? 2500 : 0)
+                .show();
 
             // Reposition the tooltip for half a second
             var positionFixInterval = setInterval(function() {
@@ -233,7 +242,7 @@ $(document).on("pageshow", function() {
             }, 5);
             setTimeout(function() {
                 clearInterval(positionFixInterval);
-            }, 500);
+            }, 1000);
         }
 
         // Register all events for connections
