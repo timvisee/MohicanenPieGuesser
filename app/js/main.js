@@ -666,8 +666,8 @@ $(document).on("pageshow", function() {
              * Refresh the guesses after initialization.
              */
             function refreshGuessesLate() {
-                // Make sure the script is running for at least two seconds already
-                if(startTime + 2000 > Date.now())
+                // Make sure the script is running for at least three and a half seconds already
+                if(startTime + 3500 > Date.now())
                     return true;
 
                 // Show a status message
