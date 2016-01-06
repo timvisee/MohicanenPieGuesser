@@ -94,15 +94,13 @@ $(document).on("pageshow", function() {
             else if(connectionIndicator.hasClass('none'))
                 currentState = 'none';
 
-            // Determine the new state and whether to keep showing the state
+            // Determine the new state
             var newState = '';
-            var keepShowingState = true;
             if(state == 'connecting')
                 newState = 'connecting';
-            else if(state == 'connected') {
+            else if(state == 'connected')
                 newState = 'connected';
-                keepShowingState = false;
-            } else if(state == 'disconnected')
+            else if(state == 'disconnected')
                 newState = 'disconnected';
             else if(state == 'initialized')
                 newState = 'none';
@@ -122,13 +120,17 @@ $(document).on("pageshow", function() {
                 // Apply the new state to the DOM
                 connectionIndicator.addClass(newState);
 
+                // Determine whether to keep showing the state
+                var keepShowingState = true;
+
                 // Set the popup message
                 var tooltipMessage = '';
                 if(newState == 'connecting')
                     tooltipMessage = 'Verbinden...';
-                else if(newState == 'connected')
+                else if(newState == 'connected') {
                     tooltipMessage = 'Verbonden';
-                else if(newState == 'unstable')
+                    keepShowingState = false;
+                } else if(newState == 'unstable')
                     tooltipMessage = 'Verbinding instabiel';
                 else if(newState == 'disconnected')
                     tooltipMessage = 'Verbinding verbroken';
@@ -138,7 +140,7 @@ $(document).on("pageshow", function() {
                     tooltipMessage = 'Geen verbinding';
 
                 // Show the tooltip
-                showConnectionIndicatorTooltip(tooltipMessage, keepShowingState);
+                showConnectionIndicatorTooltip(tooltipMessage, !keepShowingState);
             }
         }
 
