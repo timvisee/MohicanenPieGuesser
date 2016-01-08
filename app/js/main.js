@@ -618,6 +618,9 @@ $(document).on("pageshow", function() {
                     dataType: "json",
                     timeout: 10000,
                     success:function(data) {
+                        // Set the last connection state
+                        lastRefreshState = true;
+
                         // Show the error message if returned
                         if(data.hasOwnProperty('error')) {
                             alert("A fatal error has been detected by Carbon CORE: Failed to parse guesses data.");
@@ -632,6 +635,9 @@ $(document).on("pageshow", function() {
                         updateAll();
                     },
                     error: function() {
+                        // Set the last connection state
+                        lastRefreshState = false;
+
                         // An error occurred, show a status message
                         showGuessChartTooltip('Fout bij verversen', false);
                     },
@@ -642,12 +648,18 @@ $(document).on("pageshow", function() {
                         // Hide the loading indicator
                         if(showLoadingIndicator)
                             hideLoader();
+
+                        // Restart the guesses refresh timer
+                        startRefreshTimer();
                     }
                 });
             }
 
             // The guesses refresh timer
             var guessesRefreshTimer = null;
+
+            // The last state of the guesses refresh, true if succeed false otherwise
+            var lastRefreshState = true;
 
             /**
              * Start or restart the refresh timer.
@@ -656,10 +668,17 @@ $(document).on("pageshow", function() {
                 // Stop the current timer
                 stopRefreshTimer();
 
+                // Determine the refresh delay, based on the connection state
+                var connectionTimeout = 1000 * 60 * 2;
+
+                // Use a connection timer of 5 seconds if the last connection failed
+                if(!lastRefreshState)
+                    connectionTimeout = 1000 * 5;
+
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
                     refreshGuessesLate();
-                }, 1000 * 60 * 2);
+                }, connectionTimeout);
             }
 
             /**
