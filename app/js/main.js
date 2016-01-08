@@ -441,8 +441,10 @@ $(document).on("pageshow", function() {
                             return (this.value * graphSteps) + " gram"; // Proper xaxis name
                         },
                         tickInterval: 2,
-                        fontSize: '60px',
-                        color: 'red'
+                        color: 'red',
+                        style: {
+                            fontSize: '19.2px'
+                        }
                     }
                 },
                 yAxis: {
