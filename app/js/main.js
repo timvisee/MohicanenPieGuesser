@@ -440,22 +440,16 @@ $(document).on("pageshow", function() {
                         formatter: function () {
                             return (this.value * graphSteps) + " gram";
                         },
-                        style: {
-                            fontSize: '19.2px'
-                        }
+                        style: {}
                     }
                 },
                 yAxis: {
                     title: {
                         text: 'Aantal schattingen per gram',
-                        style: {
-                            fontSize: '19.2px'
-                        }
+                        style: {}
                     },
                     labels: {
-                        style: {
-                            fontSize: '19.2px'
-                        }
+                        style: {}
                     },
                     tickInterval: 1
                 },
