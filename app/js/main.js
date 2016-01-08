@@ -443,8 +443,7 @@ $(document).on("pageshow", function() {
                         style: {
                             fontSize: '19.2px'
                         }
-                    },
-                    tickPixelInterval: 200
+                    }
                 },
                 yAxis: {
                     title: {
@@ -486,7 +485,7 @@ $(document).on("pageshow", function() {
                             hover: {
                                 lineWidth: 5
                             }
-                        },
+                        }
                     }
                 },
                 series: [{
@@ -499,6 +498,14 @@ $(document).on("pageshow", function() {
                 colors: ['#0067B2'],
                 credits: false
             };
+
+            // Enlarge the graph size if it's shown on the screen
+            if(pageId == 'page-screen') {
+                chartOptions.xAxis.labels.style.fontSize = '19.2px';
+                chartOptions.xAxis.tickPixelInterval = 200;
+                chartOptions.yAxis.labels.style.fontSize = '19.2px';
+                chartOptions.yAxis.title.style.fontSize = '19.2px';
+            }
 
             // Create a new chart
             var chart = new Highcharts.Chart(chartOptions);
