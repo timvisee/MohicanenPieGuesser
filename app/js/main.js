@@ -600,6 +600,9 @@ $(document).on("pageshow", function() {
                 updateChart();
             }
 
+            // The last state of the guesses refresh, true if succeed false otherwise
+            var lastRefreshState = true;
+
             /**
              * Refresh the current guesses.
              *
@@ -657,9 +660,6 @@ $(document).on("pageshow", function() {
 
             // The guesses refresh timer
             var guessesRefreshTimer = null;
-
-            // The last state of the guesses refresh, true if succeed false otherwise
-            var lastRefreshState = true;
 
             /**
              * Start or restart the refresh timer.
