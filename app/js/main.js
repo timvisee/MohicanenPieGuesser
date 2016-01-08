@@ -438,18 +438,25 @@ $(document).on("pageshow", function() {
                     allowDecimals: false,
                     labels: {
                         formatter: function () {
-                            return (this.value * graphSteps) + " gram"; // Proper xaxis name
+                            return (this.value * graphSteps) + " gram";
                         },
-                        tickInterval: 2,
-                        color: 'red',
                         style: {
                             fontSize: '19.2px'
                         }
-                    }
+                    },
+                    tickPixelInterval: 200
                 },
                 yAxis: {
                     title: {
-                        text: 'Aantal schattingen per gram'
+                        text: 'Aantal schattingen per gram',
+                        style: {
+                            fontSize: '19.2px'
+                        }
+                    },
+                    labels: {
+                        style: {
+                            fontSize: '19.2px'
+                        }
                     },
                     tickInterval: 1
                 },
