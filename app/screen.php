@@ -19,12 +19,12 @@ require_once('top.php');
             <fieldset class="ui-grid-a">
                 <div class="ui-block-a" style="width: 60%;">
                     <div data-role="main" class="ui-content" align="center">
-                        <img src="http://weknowyourdreams.com/images/cake/cake-05.jpg" style="height: 230px; box-shadow: 0 0 20px rgba(0, 0, 0, .45);" />
+                        <img src="http://weknowyourdreams.com/images/cake/cake-05.jpg" style="height: 210px; box-shadow: 0 0 20px rgba(0, 0, 0, .45);" />
                     </div>
                 </div>
                 <div class="ui-block-b" style="width: 40%;">
                     <div data-role="main" class="ui-content" align="center">
-                        <img src="style/image/logo/logo_original.png" style="height: 230px;" />
+                        <img src="style/image/logo/logo_original.png" style="height: 210px;" />
                     </div>
                 </div>
             </fieldset>
