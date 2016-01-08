@@ -55,6 +55,22 @@ function hideLoader() {
     $.mobile.loading("hide");
 }
 
+
+
+/**
+ * Define the guesses refresh timeouts for a connected and disconnected network state.
+ * @type {number}
+ */
+var GUESSES_REFRESH_TIMEOUT_CONNECTED = 1000 * 60 * 2;
+
+/**
+ * Define the guesses refresh timeouts for a connected and disconnected network state.
+ * @type {number}
+ */
+var GUESSES_REFRESH_TIMEOUT_DISCONNECTED = 1000 * 5;
+
+
+
 // Page dependend scripts
 $(document).on("pageshow", function() {
     // Get the active page ID
@@ -669,11 +685,11 @@ $(document).on("pageshow", function() {
                 stopRefreshTimer();
 
                 // Determine the refresh delay, based on the connection state
-                var connectionTimeout = 1000 * 60 * 2;
+                var connectionTimeout = GUESSES_REFRESH_TIMEOUT_CONNECTED;
 
                 // Use a connection timer of 5 seconds if the last connection failed
                 if(!lastRefreshState)
-                    connectionTimeout = 1000 * 5;
+                    connectionTimeout = GUESSES_REFRESH_TIMEOUT_DISCONNECTED;
 
                 // Set up the timer
                 guessesRefreshTimer = setInterval(function() {
