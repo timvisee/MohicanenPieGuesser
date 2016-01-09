@@ -657,7 +657,9 @@ $(document).on("pageshow", function() {
                         }
 
                         // The guesses and client guesses data
+                        //noinspection JSUnresolvedVariable
                         guesses = data.guesses;
+                        //noinspection JSUnresolvedVariable
                         clientGuesses = data.clientGuesses;
 
                         // Update everything
