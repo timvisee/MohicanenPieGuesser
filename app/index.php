@@ -13,7 +13,7 @@ require_once('top.php');
     <div data-role="main" class="ui-content">
 
         <div data-role="main" class="ui-content" align="center">
-            <img src="http://weknowyourdreams.com/images/cake/cake-05.jpg" style="max-height: 200px; max-width: 100%; box-shadow: 0 0 6px rgba(0, 0, 0, .35);" />
+            <img src="<?=$site_root; ?>style/image/cake/cake_small.png" style="max-height: 220px; max-width: 100%; box-shadow: 0 0 6px rgba(0, 0, 0, .35);" />
         </div>
 
         <div data-role="main" class="ui-content" align="center">
