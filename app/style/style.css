@@ -344,7 +344,7 @@ input.ui-btn.ui-btn-active {
   border-radius: 16px;
   float: right;
   margin: 15px;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35), inset 1px 1px 4px rgba(255, 255, 255, 0.45); }
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3), inset 1px 1px 4px rgba(255, 255, 255, 0.45); }
 
 #connection-indicator.connected {
   background-color: #00b200; }
