@@ -343,24 +343,21 @@ input.ui-btn.ui-btn-active {
   height: 14px;
   border-radius: 16px;
   float: right;
-  margin: 15px; }
+  margin: 15px;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35), inset 1px 1px 4px rgba(255, 255, 255, 0.45); }
 
 #connection-indicator.connected {
-  background-color: #00bc00;
-  box-shadow: 0 0 6px #00c800; }
+  background-color: #00b200; }
 
 #connection-indicator.disconnected,
 #connection-indicator.unavailable {
-  background-color: #c5000d;
-  box-shadow: 0 0 6px #ff2f31; }
+  background-color: #c5000d; }
 
 #connection-indicator.unstable,
 #connection-indicator.connecting {
-  background-color: #d1c104 !important;
-  box-shadow: 0 0 6px #e3cd00 !important; }
+  background-color: #d1c104 !important; }
 
 #connection-indicator.none {
-  background-color: #acabaa;
-  box-shadow: 0 0 6px #b9b8b7; }
+  background-color: #acabaa; }
 
 /*# sourceMappingURL=style.css.map */
