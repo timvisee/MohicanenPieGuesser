@@ -605,7 +605,7 @@ $(document).on("pageshow", function() {
 
                             // Plot the guess line
                             chart.xAxis[0].addPlotLine({
-                                color: 'red',
+                                color: '#000459',
                                 dashStyle: 'solid',
                                 value: Math.round(clientGuesses[i].weight / graphSteps) - min,
                                 width: 2,
@@ -614,7 +614,10 @@ $(document).on("pageshow", function() {
                                     align: 'right',
                                     rotation: 270,
                                     x: -7,
-                                    y: +4
+                                    y: +4,
+                                    style: {
+                                        color: '#000459'
+                                    }
                                 },
                                 id: guessId
                             });
