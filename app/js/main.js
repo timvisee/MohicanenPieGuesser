@@ -426,7 +426,7 @@ $(document).on("pageshow", function() {
             // Define the chart options
             var chartOptions = {
                 chart: {
-                    backgroundColor: '#F9F9F9', // 000255
+                    backgroundColor: '#F9F9F9', // 000547
                     renderTo: 'guess-chart',
                     type: 'areaspline'
                 },
@@ -440,7 +440,7 @@ $(document).on("pageshow", function() {
                         formatter: function () {
                             return (this.value * graphSteps) + " gram";
                         },
-                        style: {}
+                        style: { }
                     }
                 },
                 yAxis: {
@@ -493,12 +493,18 @@ $(document).on("pageshow", function() {
                 credits: false
             };
 
-            // Enlarge the graph size if it's shown on the screen
+            // Modify the chart to properly appear if shown on the big screen
             if(pageId == 'page-screen') {
+                chartOptions.chart.backgroundColor = '#000459';
                 chartOptions.xAxis.labels.style.fontSize = '19.2px';
+                chartOptions.xAxis.labels.style.color = '#C1CFDA';
                 chartOptions.xAxis.tickPixelInterval = 200;
                 chartOptions.yAxis.labels.style.fontSize = '19.2px';
+                chartOptions.yAxis.labels.style.color = '#C1CFDA';
                 chartOptions.yAxis.title.style.fontSize = '19.2px';
+                chartOptions.yAxis.title.style.color = '#C1CFDA';
+                chartOptions.yAxis.gridLineColor = '#474D51';
+                chartOptions.colors = ['#0085DD'];
             }
 
             // Create a new chart
@@ -563,56 +569,59 @@ $(document).on("pageshow", function() {
                 // Set the chart data
                 chart.series[0].setData(data, true);
 
-                // Loop through all the plotted client guesses, and remove the client guesses if they don't exist anymore
-                for(i = 0; i < clientGuessesPlotted.length; i++) {
-                    // Get the ID
-                    var plotId = clientGuessesPlotted[i];
+                // Plot the lines
+                if(pageId != 'page-screen') {
+                    // Loop through all the plotted client guesses, and remove the client guesses if they don't exist anymore
+                    for(i = 0; i < clientGuessesPlotted.length; i++) {
+                        // Get the ID
+                        var plotId = clientGuessesPlotted[i];
 
-                    // Make sure this ID is still in the client guesses list
-                    var inList = false;
-                    for(var j = 0; j < clientGuesses.length; j++) {
-                        // Check whether the ID equals the current ID in the list
-                        if(clientGuesses[j].id == plotId) {
-                            // Set the flag
-                            inList = true;
+                        // Make sure this ID is still in the client guesses list
+                        var inList = false;
+                        for(var j = 0; j < clientGuesses.length; j++) {
+                            // Check whether the ID equals the current ID in the list
+                            if(clientGuesses[j].id == plotId) {
+                                // Set the flag
+                                inList = true;
 
-                            // Break the loop
-                            break;
+                                // Break the loop
+                                break;
+                            }
                         }
+
+                        // Remove the plotted line if it doesn't exist anymore
+                        if(!inList)
+                            chart.xAxis[0].removePlotLine(plotId);
                     }
 
-                    // Remove the plotted line if it doesn't exist anymore
-                    if(!inList)
-                        chart.xAxis[0].removePlotLine(plotId);
-                }
+                    // Plot the client guesses
+                    for(i = 0; i < clientGuesses.length; i++) {
+                        // Get some parameters
+                        var guessId = clientGuesses[i].id;
 
-                // Plot the client guesses
-                for(i = 0; i < clientGuesses.length; i++) {
-                    // Get some parameters
-                    var guessId = clientGuesses[i].id;
+                        // Only plot the new line if it isn't plotted yet
+                        if($.inArray(guessId, clientGuessesPlotted) == -1) {
+                            var fullName = clientGuesses[i].firstName + ' ' + clientGuesses[i].lastName;
 
-                    // Only plot the new line if it isn't plotted yet
-                    if($.inArray(guessId, clientGuessesPlotted) == -1) {
-                        var fullName = clientGuesses[i].firstName + ' ' + clientGuesses[i].lastName;
+                            // Plot the guess line
+                            chart.xAxis[0].addPlotLine({
+                                color: 'red',
+                                dashStyle: 'solid',
+                                value: Math.round(clientGuesses[i].weight / graphSteps) - min,
+                                width: 2,
+                                label: {
+                                    text: fullName,
+                                    align: 'right',
+                                    rotation: 270,
+                                    x: -7,
+                                    y: +4
+                                },
+                                id: guessId
+                            });
 
-                        // Plot the guess line
-                        chart.xAxis[0].addPlotLine({
-                            color: 'red',
-                            dashStyle: 'solid',
-                            value: Math.round(clientGuesses[i].weight / graphSteps) - min,
-                            width: 2,
-                            label: {
-                                text: fullName,
-                                align: 'right',
-                                rotation: 270,
-                                x: -7,
-                                y: +4
-                            },
-                            id: guessId
-                        });
-
-                        // Add the plot ID to the array
-                        clientGuessesPlotted.push(guessId);
+                            // Add the plot ID to the array
+                            clientGuessesPlotted.push(guessId);
+                        }
                     }
                 }
             }
