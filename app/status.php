@@ -26,7 +26,7 @@ require_once('top.php');
             </tr>
             <tr>
                 <td>Sessie</td>
-                <td><?=session_id(); ?></td>
+                <td><?=getSessionKey(); ?></td>
             </tr>
             <tr>
                 <td><?=__('pageStatus', 'uptime'); ?></td>
@@ -41,7 +41,7 @@ require_once('top.php');
                             echo '<i>Unknown</i>';
                         }
                     } else
-                        echo '<i>Unknown</i>';
+                        echo '<i>Meer dan 15 dagen</i>';
                     ?></td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@ require_once('top.php');
                         echo $cpu[1] . ' (5 min avg)<br />';
                         echo $cpu[2] . ' (15 min avg)<br />';
                     } else
-                        echo '<i>Unknown</i>';
+                        echo '<i>&lt;1%</i>';
                     ?></td>
             </tr>
         </table>
