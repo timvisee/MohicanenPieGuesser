@@ -426,7 +426,7 @@ $(document).on("pageshow", function() {
             // Define the chart options
             var chartOptions = {
                 chart: {
-                    backgroundColor: '#F9F9F9',
+                    backgroundColor: '#F9F9F9', // 000255
                     renderTo: 'guess-chart',
                     type: 'areaspline'
                 },
