@@ -17,10 +17,14 @@ require_once('top.php');
         </div>
 
         <div data-role="main" class="ui-content" align="center">
-            <p>Welkom bij de Mohicanen NJO van 2016.<br />
+            <p>
+                <b>Noot: </b>Deze actie is inmiddels verlopen.<br />
+                <br />
+                Welkom bij de Mohicanen NJO van 2016.<br />
                 <br />
                 Weet jij hoe zwaar deze taart is?<br />
-                Stuur jouw schatting in en maak kans op het winnen van deze taart.</p>
+                Stuur jouw schatting in en maak kans op het winnen van deze taart.
+            </p>
         </div>
 
         <br />
