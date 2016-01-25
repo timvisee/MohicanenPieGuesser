@@ -15,7 +15,7 @@ return Array(
         'port' => 3306,
         'database' => 'mohicanenpieguesser',
         'user' => 'root',
-        'password' => 'hoihoi', // Yes, there's a password in here. Does it matter, NO! Go away, filthy hacker.
+        'password' => '', // Yes, there might be a password in here. Does it matter, NO! Go away, filthy hacker.
         'table_prefix' => 'mpg_'
     ),
 
