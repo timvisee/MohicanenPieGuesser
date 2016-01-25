@@ -195,7 +195,8 @@ $(document).on("pageshow", function() {
 
                     // Do a late refresh after half a second if we're still connected
                     setTimeout(function() {
-                        refreshGuessesLate();
+                        if(startTime + 2500 < Date.now())
+                            refreshGuessesLate();
                     }, 500);
 
                     // Restart the refresh timer

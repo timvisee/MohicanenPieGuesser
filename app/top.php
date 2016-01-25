@@ -9,13 +9,13 @@ require_once('app/init.php');
 
 // Set the site's path
 $site_root = Config::getValue('general', 'site_url', '');
-$site_root = '';
 
 ?>
 <!DOCTYPE>
 <html>
 <head>
 
+    <!-- Title -->
     <title>Hoe zwaar is de taart? &middot; Mohicanen NJO 2016</title>
 
     <!-- Meta -->
